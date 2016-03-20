@@ -37,7 +37,11 @@ $college = $result->fetch();
 printf("<table align='center' cellspacing='0' cellpadding='4'>");
 printf("<tr><td><h1>%s</h1></td></tr>", $college['name']);
 printf("<tr><td><h2>%s, %s</h2></td></tr>", $college['city'], $college['state']);
-printf("<tr><td><h2> Website : <a href='http://%s'>%s</a></h2></td></tr>", $college['website'], $college['website']);
+$website = $college['website'];
+if (!(substr( $website, 0, 4 ) == "http")){
+    $website = "http://" . $website;
+}
+printf("<tr><td><h2> Website : <a href='%s'>%s</a></h2></td></tr>", $website, $website);
 printf("</table>");
 ?>
 
