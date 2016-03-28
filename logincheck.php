@@ -25,3 +25,7 @@ else {
 	</script>';
 }
 ?>
+<html>
+<head><script type="text/javascript"> sessionStorage.clear()</script></head>
+</html>
+
