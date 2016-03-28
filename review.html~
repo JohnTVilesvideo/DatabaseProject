@@ -26,17 +26,19 @@ $(document).ready(function(){
 <form id='fmAdd' method='POST' action='add_course_review.php'>
 <table style="float:center">
 	<tr>
+		<td><input type='text' name='professor' placeholder='Professor'></td>
+		<td width="100"></td>
+		<td><input type='text' name='course' placeholder='Course'></td>
+	</tr>
+	<tr>
 		<td><input type='text' name='college' placeholder="College Name"></td>
 		<td width='100'></td>
 		<td><input type='text' name='department' placeholder='Department'></td>
 	</tr>
 	<tr>
-		<td><input type='text' name='course' placeholder='Course'></td>
-	</tr>
-	<tr>
-		<td><input type='text' name='professor' placeholder='Professor'></td>
-		<td width='100'></td>
-		<td><a href='prof_review.html'>Rate this professor</a></td>
+		<td><p>Overall Rating:</p></td>
+		<td></td>
+		<td><div w3-include-html="star_rating.html"></div> <script src="include-HTML.js"></script> </td>
 	</tr>
 	<tr>
 		<td><p>Easiness:</p></td>
@@ -60,11 +62,6 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td><textarea rows=5 cols=50 form='fmAdd' name='tips' placeholder="What are some tips you might have for other people who are going to take the course?"></textarea></td>
-	</tr>
-	<tr>
-		<td><p>Overall Rating:</p></td>
-<td></td>
-		<td><div w3-include-html="star_rating.html"></div> <script src="include-HTML.js"></script> </td>
 	</tr>
 </table>
 
