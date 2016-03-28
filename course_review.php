@@ -37,41 +37,69 @@ $(document).ready(function(){
 <body>
 
 <h1 style="text-align: center">Course Review</h1>
-<table style="float:center"></table> 
 <form id='courseReview' method='POST' action='add_course_review.php' accept-charset="UTF-8">
 <!--<input type="hidden" name="profID">
 <input type="hidden" name="courseID">-->
 <table style="float:center">
 	<tr> 
-		<td><button type="button" id='usePrev'>Use previous information</button></td>
-		<td width='100'></td>
-		<td><input type="reset" value="clear all" /></td>
+		<td>
+			<table>
+			<tr>
+				<td><button type="button" id='usePrev'>Use previous information</button></td>
+				<td align="center"><input type="reset" value="Clear all"/></td>
+			</tr>
+			</table>
+		</td>
 	</tr>
 	<tr>
-		<td><input type='text' id='college' name='college' placeholder="College Name"></td>
-		<td width='100'></td>
-		<td><input type='text' id='dept' name='department' placeholder='Department'></td>
+		<td>
+		<table>
+		<tr>
+			<td><input type='text' id='college' name='college' placeholder="College Name"></td>
+			<td><input type='text' id='dept' name='department' placeholder='Department'></td>
+		</tr>
+		</table>
+		</td>
 	</tr>
 	<tr>
-		<td><input type='text' id='course' name='course' placeholder='Course'></td>
+		<td>
+		<table>
+		<tr>
+			<td><input type='text' id='course' name='course' placeholder='Course'></td>
+			<td><input type='text' id='professor' name='professor' placeholder='Professor'></td>
+		</tr>
+		</table>
+		</td>
 	</tr>
 	<tr>
-		<td><input type='text' id='professor' name='professor' placeholder='Professor'></td>
-	</tr>
-	<tr>
-		<td><p>Easiness:</p></td>
-		<td></td>
+		<td>
+		<table>
+		<tr>
+			<td><p>Easiness:</p></td>
+			<td align='left'>
+				<input type='radio' name='easiness' value=1>
+				<input type='radio' name='easiness' value=2>
+				<input type='radio' name='easiness' value=3>
+				<input type='radio' name='easiness' value=4>
+				<input type='radio' name='easiness' value=5>
+			</td>
+		</tr>
+		</table>
+		</td>
 		<!--<td><div w3-include-html="star_rating.html"></div> <script src="include-HTML.js"></script> </td>-->
 	</tr>
 	<tr>
-		<td><p>Textbook required:</p></td>
-		<td width='100'></td>
-		<td><input type="radio" name="isTextRequired" value="Yes">Yes
+		<td>
+		<table>
+		<tr>
+			<td><p>Textbook required:</p></td>
+			<td><input type="radio" name="isTextRequired" value="Yes">Yes
 		    <input type="radio" name="isTextRequired" value="No"> No</td>
+		</tr>
+		</table>
+		</td>
 	</tr>
-</table>
 
-<table>	
 	<tr>
 		<td><textarea rows=10 cols=50 form='courseReview' name='review' placeholder="Course Review"></textarea></td>	
 	</tr>
