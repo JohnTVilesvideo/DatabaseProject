@@ -2,7 +2,7 @@
 include_once('db_connect.php');
 
 session_start();
-
+error_reporting(E_ALL);
 //print_r($_POST);
 
 $userID = $_SESSION['user_id'];
@@ -15,6 +15,7 @@ $professor = $_POST['professor'];
 $course = $_POST['course'];
 $profReview = $_POST['professorReview'];
 $helpfulness = $_POST['helpfulness'];
+$clarity = $_POST['clarity'];
 $easiness = $_POST['easiness'];
 $overall = $_POST['overall'];
 
@@ -33,7 +34,7 @@ $overall = $_POST['overall'];
 	printf("Department id: %d\n", $deptID);
 
 	/* professor id */
-	$getProf = $db->query("SELECT id FROM professor WHERE college_id=$collegeID AND dept_id=$deptID AND name='$professor'");
+	$getProf = $db->query("SELECT id FROM professor WHERE dept_id=$deptID AND name='$professor'");
 	$resultProf = $getProf->fetch();
 	$profID = $resultProf['id'];
 	printf("Professor id: %d\n", $profID);
@@ -48,12 +49,12 @@ echo "".$profID;
 echo "".$courseID;
 
 /* Add review to professor */
-$query = "INSERT INTO prof_review_new VALUES($profID, $userID, '$profReview', $helpfulness, $easiness, $clarity, $overall)";
-printf("Insertion Query: %s \n", $query);
-$result = $db->query($query);
+$query = $db->prepare("INSERT INTO prof_review VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
+$result = $query->execute(array($userID, $profID, $courseID, $profReview, $helpfulness, $easiness, $clarity, $overall));
+
 // handle if the user already write a review of this course for this professor
-if ($result != FALSE) {
-	printf("<p>You have reviewed professor <b>%s</b>. If you have not reviewed the course <b>%s</b> yet, please take some minutes to <a href='course_review.php'>review</a> or click <a href='main.html'>here</a> to go back to main page</p>", $professor, $course);
+if ($result) {
+	printf("<p>You have reviewed professor <b>%s</b>! If you have not reviewed the course <b>%s</b> yet, please take some minutes to <a href='course_review.php'>review</a> or click <a href='main.html'>here</a> to go back to main page</p>", $professor, $course);
 }
 else {
 	printf("<p>You have reviewed professor <b>%s</b> already. Please <a href='main.html'>update</a> your review or <a href='professor_review.php'>review</a> a new professor</p>", $professor);

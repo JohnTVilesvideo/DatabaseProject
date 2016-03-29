@@ -37,7 +37,7 @@ $overall = $_POST['overall'];
 	printf("Department id: %d\n", $deptID);
 
 	/* professor id */
-	$getProf = $db->query("SELECT id FROM professor WHERE college_id=$collegeID AND dept_id=$deptID AND name='$professor'");
+	$getProf = $db->query("SELECT id FROM professor WHERE dept_id=$deptID AND name='$professor'");
 	$resultProf = $getProf->fetch();
 	$profID = $resultProf['id'];
 	printf("Professor id: %d\n", $profID);
@@ -50,11 +50,11 @@ $overall = $_POST['overall'];
 
 
 /* Add review to course */
-$query = "INSERT INTO course_review_new VALUES($courseID, $userID, $profID, '$courseReview', $easiness, $overall, $textbook, '$usefulness', '$tips')";
-printf("Insertion Query: %s \n", $query);
-$result = $db->query($query);
-if ($result != FALSE) {
-	printf("<p>You have reviewed course <b>%s</b>. If you have not reviewed professor <b>%s</b> yet, please take some minutes to <a href='professor_review.php'>review</a> or click <a href='main.html'>here</a> to go back to main page</p>", $course, $professor);
+$query = $db->prepare("INSERT INTO course_review VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?);");
+$result = $query->execute(array($userID, $courseID, $profID, $easiness, $textbook, $courseReview, $usefulness, $tips, $overall));
+
+if ($result) {
+	printf("<p>You have reviewed course <b>%s</b>! If you have not reviewed professor <b>%s</b> yet, please take some minutes to <a href='professor_review.php'>review</a> or click <a href='main.html'>here</a> to go back to main page</p>", $course, $professor);
 }
 else {
 	printf("<p>You have already reviewed course <b>%s</b> with professor <b>%s</b>. Please <a href='main.html'>update</a> your review or <a href='course_review.php'>review</a> a new course</p>", $course, $professor);
