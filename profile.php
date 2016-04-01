@@ -25,18 +25,64 @@ printf("<tr><td><h3 style='text-align: right'>Password:</h3></td><td><h3>*******
 printf("</table>");
 ?>
 
+<h2><p align="center">Course Reviews</p></h2>
 <table align="center" cellspacing="0" cellpadding="4" border="1">
     <tr>
-        <td><h2><b>Course</b></h2></td>
-        <td><h2><b>Professor</b></h2></td>
-        <td><h2><b>Course Review</b></h2></td>
-        <td><h2><b>Course Rating</b></h2></td>
-        <td><h2><b>Professor Review</b></h2></td>
-        <td><h2><b>Professor Rating</b></h2></td>
+        <th>Details</th>
+        <th>Reviews</th>
+        <th>Ratings</th>
+        <th>Operations</th>
     </tr>
     <?php
-    $query = "SELECT * ".
-             "FROM (review JOIN course_review ON course_review_id = course_review.id) JOIN prof_review ON prof_review_id =  prof_review.id WHERE reviewer_id = $user_id;";
+    $query = "Select * from course_review WHERE user_id=$user_id";
     $result = $db->query($query);
+    foreach($result as $row){
+        $prof_id = $row['prof_id'];
+        $query = "SELECT name FROM professor WHERE id=$prof_id;";
+        $prof = $db->query($query)->fetch();
+        $book_required = "";
+        if($row['textbook_required'] == null){
+            $book_required = "N/A";
+        }
+        elseif ($row['textbook_required'] == 0){
+            $book_required = "No";
+        }
+        else{
+            $book_required = "Yes";
+        }
+        printf("<tr>");
+        printf("<td><p><b>Instructor:</b> <a href='professor.php?id=%s'>%s</a></p><p><b>Textbook Required:</b> %s</p></td>",
+            $prof_id, $prof['name'], $book_required);
+        printf("<td><p><b>Review:</b> %s</p> <p><b>Usefulness:</b> %s</p> <p><b>Tips:</b> %s</p></td>", $row['review'], $row['usefulness'], $row['tips']);
+        printf("<td><p><b>Easiness:</b> %s</p> <p><b>Overall Rating:</b> %s</p>", $row['easiness'], $row['overall_rating']);
+        printf("<td><a href='%s'>Edit</a>  <a href='%s' >Delete</a> </td>", '#', '#');
+        printf("</tr>");
+    }
+    ?>
+</table>
+
+<h2><p align="center">Professor Reviews</p></h2>
+<table align="center" cellspacing="0" cellpadding="4" border="1">
+    <tr>
+        <th>Details</th>
+        <th>Reviews</th>
+        <th>Ratings</th>
+        <th>Operations</th>
+    </tr>
+    <?php
+    $query = "SELECT * FROM prof_review WHERE user_id=$user_id";
+    $result = $db->query($query);
+    foreach($result as $row){
+        $course_id = $row['course_id'];
+        $query = "SELECT name FROM course WHERE id=$course_id;";
+        $course = $db->query($query)->fetch();
+        printf("<tr>");
+        printf("<td><a href='course.php?id=%s'>%s</a></td>",$course_id, $course['name']);
+        printf("<td>%s</td>", $row['review']);
+        printf("<td><p><b>Helpfulness:</b> %s</p><p><b>Easiness:</b> %s</p><p><b>Clarity:</b> %s</p> <p><b>Overall Rating:</b> %s</p>",
+            $row['helpfulness'], $row['easiness'], $row['clarity'], $row['overall_rating']);
+        printf("<td><a href='%s'>Edit</a>  <a href='%s' >Delete</a> </td>", '#', '#');
+        printf("</tr>");
+    }
     ?>
 </table>

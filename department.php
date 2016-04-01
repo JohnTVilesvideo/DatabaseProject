@@ -60,7 +60,17 @@ printf("</table>");
     $query = "SELECT * FROM course WHERE dept_id = $id;";
     $result = $db->query($query);
     foreach ($result as $row) {
-        printf("<tr><td><a href='course.php?id=%s'>%s</a></td> <td> N/A</td></tr>", $row['id'], $row['name']);
+        $course_id = $row['id'];
+        $query = "SELECT AVG(overall_rating) AS avgRating FROM course_review WHERE course_id=$course_id;";
+        $result = $db->query($query)->fetch();
+        $avgRating = $result['avgRating'];
+        if($avgRating == 0){
+            $avgRating = 'N/A';
+        }
+        else{
+            $avgRating = sprintf("%.1f", $avgRating);
+        }
+        printf("<tr><td><a href='course.php?id=%s'>%s</a></td> <td>%s</td></tr>", $row['id'], $row['name'], $avgRating);
     }
     ?>
 
@@ -78,31 +88,20 @@ printf("</table>");
     $query = "SELECT * FROM professor WHERE dept_id = $id;";
     $result = $db->query($query);
     foreach ($result as $row) {
-        printf("<tr><td><a href='professor.php?id=%s'>%s</a></td> <td> N/A</td></tr>", $row['id'], $row['name']);
+        $prof_id = $row['id'];
+        $query = "SELECT AVG(overall_rating) AS avgRating FROM prof_review WHERE prof_id=$prof_id;";
+        $result = $db->query($query)->fetch();
+        $avgRating = $result['avgRating'];
+        if($avgRating == 0){
+            $avgRating = 'N/A';
+        }
+        else{
+            $avgRating = sprintf("%.1f", $avgRating);
+        }
+        printf("<tr><td><a href='professor.php?id=%s'>%s</a></td> <td>%s</td></tr>", $row['id'], $row['name'], $avgRating);
     }
     ?>
 
 </table>
-
-
-<!--<table align="center" cellspacing="0" cellpadding="4" border="1">-->
-<!--    <tr>-->
-<!--        <td><h2><b>Professor</b></h2></td>-->
-<!--        <td><h2><b>Department</b></h2></td>-->
-<!--    </tr>-->
-<!---->
-<!--    --><?php
-//    $query = "SELECT * FROM professor WHERE department_id=$id";
-//    $result = $db->query($query);
-//    foreach($result as $row){
-//        $dept_id = $row['dept_id'];
-//        $result = $db->query("SELECT * FROM department WHERE id=$dept_id");
-//        $dept = $result->fetch();
-//        printf("<tr><td><a href='professor.php?id=%s'>%s</a></td><td><a href='department.php?id=%s'>%s</a> </td></tr>",
-//            $row['id'], $row['name'], $dept_id, $dept['name']);
-//    }
-//    ?>
-<!---->
-<!--</table>-->
 </body>
 </html>
