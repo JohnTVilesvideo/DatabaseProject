@@ -49,13 +49,14 @@ printf("</table>");
         <td><h2><b>Ratings</b></h2></td>
     </tr>
     <?php
-    $query = "SELECT course.id AS course_id, course.name AS course_name, prof_review.review, helpfulness, easiness, clarity, overall_rating".
-             " FROM (review JOIN prof_review ON prof_review.id = review.prof_review_id) JOIN course ON review.course_id = course.id".
-            " WHERE review.professor_id=$id;";
+    $query = "SELECT * FROM prof_review WHERE prof_id=$id";
     $result = $db->query($query);
     foreach($result as $row){
+        $course_id = $row['course_id'];
+        $query = "SELECT name FROM course WHERE id=$course_id;";
+        $course = $db->query($query)->fetch();
         printf("<tr>");
-        printf("<td><a href='course.php?id=%s'>%s</a></td>",$row['course_id'], $row['course_name']);
+        printf("<td><a href='course.php?id=%s'>%s</a></td>",$course_id, $course['name']);
         printf("<td>%s</td>", $row['review']);
         printf("<td><p><b>Helpfulness:</b> %s</p><p><b>Easiness:</b> %s</p><p><b>Clarity:</b> %s</p> <p><b>Overall Rating:</b> %s</p>",
             $row['helpfulness'], $row['easiness'], $row['clarity'], $row['overall_rating']);
