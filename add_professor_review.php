@@ -1,17 +1,12 @@
 <?php
 include_once('db_connect.php');
-
 session_start();
-error_reporting(E_ALL);
-//print_r($_POST);
 
-$userID = $_SESSION['user_id'];
-echo "user id: " . $userID;
-//$profID = $_POST['profID'];
-//$courseID = $_POST['courseID'];
-$college = $_POST['college'];
-$department = $_POST['department'];
-$professor = $_POST['professor'];
+//print_r($_POST);
+echo "user id: \n" . $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
+$prof_id = $_SESSION['prof_id'];
+$dept_id = $_SESSION['dept_id'];
 $course = $_POST['course'];
 $profReview = $_POST['professorReview'];
 $helpfulness = $_POST['helpfulness'];
@@ -19,44 +14,25 @@ $clarity = $_POST['clarity'];
 $easiness = $_POST['easiness'];
 $overall = $_POST['overall'];
 
-/* Search for prof and course id. No checking for result to exist yet */
-// college id
-$getCollege = $db->query("SELECT id FROM college WHERE name='$college'");
-$resultCollege = $getCollege->fetch();
-$collegeID = $resultCollege['id'];
-printf("College id: %d\n", $collegeID);
-
-// department id
-$getDept = $db->query("SELECT id FROM department WHERE name='$department' AND college_id=$collegeID");
-$resultDept = $getDept->fetch();
-$deptID = $resultDept['id'];
-printf("Department id: %d\n", $deptID);
-
-// professor id
-$getProf = $db->query("SELECT id FROM professor WHERE dept_id=$deptID AND name='$professor'");
-$resultProf = $getProf->fetch();
-$profID = $resultProf['id'];
-printf("Professor id: %d\n", $profID);
+printf("Department id: %d\n", $_SESSION['dept_id']);
+printf("Professor id: %d\n", $_SESSION['prof_id']);
 
 // course id
-$getCourse = $db->query("SELECT id FROM course WHERE name = '$course'  AND dept_id='$deptID'");
+$getCourse = $db->query("SELECT id FROM course WHERE name = '$course'  AND dept_id='$dept_id'");
 $resultCourse = $getCourse->fetch();
-$courseID = $resultCourse['id'];
-printf("Course id: %d\n", $courseID);
-
-echo "".$profID;
-echo "".$courseID;
+$course_id = $resultCourse['id'];
+printf("Course id: %d\n", $course_id);
 
 /* Add review to professor */
 $query = $db->prepare("INSERT INTO prof_review VALUES(?, ?, ?, ?, ?, ?, ?, ?);");
-$result = $query->execute(array($userID, $profID, $courseID, $profReview, $helpfulness, $easiness, $clarity, $overall));
+$result = $query->execute(array($user_id, $prof_id, $course_id, $profReview, $helpfulness, $easiness, $clarity, $overall));
 
 // handle if the user already write a review of this course for this professor
 if ($result) {
-	printf("<p>You have reviewed professor <b>%s</b>! If you have not reviewed the course <b>%s</b> yet, please take some minutes to <a href='course_review.php'>review</a> or click <a href='main.html'>here</a> to go back to main page</p>", $professor, $course);
+	printf("<p>You have reviewed professor <b>%s</b>! If you have not reviewed the course <b>%s</b> yet, please take some minutes to <a href='course_review.php'>review</a> or click <a href='main.html'>here</a> to go back to main page</p>", $_SESSION['prof'], $course);
 }
 else {
-	printf("<p>You have reviewed professor <b>%s</b> already. Please <a href='main.html'>update</a> your review or <a href='professor_review.php'>review</a> a new professor</p>", $professor);
+	printf("<p>You have reviewed professor <b>%s</b> for the course <b>%s</b> already. Please <a href='main.html'>update</a> your review or <a href='professor_review.php'>review</a> a new professor</p>", $_SESSION['prof'], $course);
 }
 ?>
 

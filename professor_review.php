@@ -1,12 +1,12 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['user_id'])) {
 	echo '<script language="javascript">
 	alert("Please login to review a course or professor");
 	window.location.href = "login.html";
 	</script>';
 }
+
 ?>
 
 <html>
@@ -36,36 +36,17 @@ $(document).ready(function(){
 </head>
 <body>
 
-<h1 style="text-align: center">Professor Review</h1>
+<h2 style="text-align: center">Review of Professor </h2>
+<h1 style="text-align: center"><?php printf("%s",$_SESSION['prof']); ?></h1>
+<h2 style="text-align: center"><?php printf("%s Department, %s", $_SESSION['dept'], $_SESSION['col']); ?></h2>
 <form id='profReview' method='POST' action='add_professor_review.php' accept-charset="UTF-8">
 <!--<input type="hidden" name="profID">
 <input type="hidden" name="courseID">-->
 <table style="float:center">
-	<tr> 
-		<td>
-			<table>
-			<tr>
-				<td><button type="button" id='usePrev'>Use previous information</button></td>
-				<td align="center"><input type="reset" value="Clear all"/></td>
-			</tr>
-			</table>
-		</td>
-	</tr>
 	<tr>
 		<td>
 		<table>
 		<tr>
-			<td><input type='text' id='college' name='college' placeholder="College Name"  required></td>
-			<td><input type='text' id='dept' name='department' placeholder='Department'  required></td>
-		</tr>
-		</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-		<table>
-		<tr>
-			<td><input type='text' id='professor' name='professor' placeholder="Professor Name" required></td>
 			<td><input type='text' id='course' name='course' placeholder="Course Taken" required></td>
 		</tr>
 		</table>
@@ -138,10 +119,17 @@ $(document).ready(function(){
 		</table>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td><input type='submit' value='Submit'></td>
+					<td align="center"><input type="reset" value="Clear all"/></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
 </table>
-
-<br>
-<input type='submit' value='Submit'>
 </form>
 
 <a href="logout.php">Logout</a>
