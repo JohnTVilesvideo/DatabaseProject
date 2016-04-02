@@ -5,6 +5,7 @@
  * Time: 3:18 PM
  */
 include_once('db_connect.php');
+session_start();
 if (!array_key_exists('id', $_GET)) {
     exit("Invalid url syntax. Please append ?id=x to the url, where x is the professor id");
 }
@@ -36,9 +37,22 @@ $query = "SELECT college.id AS col_id, college.name AS col_name, department.id A
     " WHERE professor.id = $id;";
 $result = $db->query($query);
 $professor_info = $result->fetch();
+
+/**
+* I added these to your code since I need these information for the review parts
+* I don't want to do query again each time I want to get these information
+*/
+$_SESSION['col'] = $professor_info['col_name'];
+$_SESSION['col_id'] = $professor_info['col_id'];
+$_SESSION['dept'] = $professor_info['dept_name'];
+$_SESSION['dept_id'] = $professor_info['dept_id'];
+$_SESSION['prof'] = $professor['name'];
+$_SESSION['prof_id'] = $id;
+/*************************************************************************************/
+
 printf("<tr><td><h2><a href='college.php?id=%s'>%s</a> </h2></td></tr>", $professor_info['col_id'], $professor_info['col_name']);
 printf("<tr><td><h2><a href='department.php?id=%s'>%s</a> </h2></td></tr>", $professor_info['dept_id'], $professor_info['dept_name']);
-printf("<tr><td><button >Rate this professor</button></td></tr>");
+printf("<tr><td><a href='professor_review.php'><button>Rate this professor</button></a></td></tr>");
 printf("</table>");
 ?>
 <h2><p align="center">Reviews for <?php printf("%s", $professor['name']); ?></p></h2>
