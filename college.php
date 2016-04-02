@@ -51,14 +51,11 @@ printf("</table>");
         <td><h2><b>Department</b></h2></td>
     </tr>
     <?php
-    $query = "SELECT * FROM professor WHERE college_id=$id";
+    $query = "SELECT professor.id AS profID, dept_id, professor.name AS profName, department.name as deptName FROM professor JOIN department WHERE dept_id = department.id  AND department.college_id=$id";
     $result = $db->query($query);
     foreach($result as $row){
-        $dept_id = $row['dept_id'];
-        $result = $db->query("SELECT * FROM department WHERE id=$dept_id");
-        $dept = $result->fetch();
         printf("<tr><td><a href='professor.php?id=%s'>%s</a></td><td><a href='department.php?id=%s'>%s</a> </td></tr>",
-            $row['id'], $row['name'], $dept_id, $dept['name']);
+            $row['profID'], $row['profName'], $row['dept_id'], $row['deptName']);
     }
     ?>
 </table>

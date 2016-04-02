@@ -50,11 +50,12 @@ printf("</table>");
         <td><h2><b>Ratings</b></h2></td>
     </tr>
     <?php
-    $query = "SELECT professor.id AS prof_id, professor.name AS prof_name, textbook_required, course_review.review, usefulness, tips, easiness, overall_rating".
-             " FROM (review JOIN course_review ON course_review.id = review.course_review_id) JOIN professor ON review.professor_id = professor.id".
-        " WHERE review.course_id=$id;";
+    $query = "Select * from course_review WHERE course_id=$id";
     $result = $db->query($query);
     foreach($result as $row){
+        $prof_id = $row['prof_id'];
+        $query = "SELECT name FROM professor WHERE id=$prof_id;";
+        $prof = $db->query($query)->fetch();
         $book_required = "";
         if($row['textbook_required'] == null){
             $book_required = "N/A";
@@ -67,7 +68,7 @@ printf("</table>");
         }
         printf("<tr>");
         printf("<td><p><b>Instructor:</b> <a href='professor.php?id=%s'>%s</a></p><p><b>Textbook Required:</b> %s</p></td>",
-            $row['prof_id'], $row['prof_name'], $book_required);
+            $prof_id, $prof['name'], $book_required);
         printf("<td><p><b>Review:</b> %s</p> <p><b>Usefulness:</b> %s</p> <p><b>Tips:</b> %s</p></td>", $row['review'], $row['usefulness'], $row['tips']);
         printf("<td><p><b>Easiness:</b> %s</p> <p><b>Overall Rating:</b> %s</p>", $row['easiness'], $row['overall_rating']);
         printf("</tr>");
