@@ -19,31 +19,30 @@ $clarity = $_POST['clarity'];
 $easiness = $_POST['easiness'];
 $overall = $_POST['overall'];
 
-/** search for prof id
- *  No checking for result to exist yet */
-/* college id */
-	$getCollege = $db->query("SELECT id FROM college WHERE name='$college'");
-	$resultCollege = $getCollege->fetch();
-	$collegeID = $resultCollege['id'];
-	printf("College id: %d\n", $collegeID);
+/* Search for prof and course id. No checking for result to exist yet */
+// college id
+$getCollege = $db->query("SELECT id FROM college WHERE name='$college'");
+$resultCollege = $getCollege->fetch();
+$collegeID = $resultCollege['id'];
+printf("College id: %d\n", $collegeID);
 
-	/* department id */
-	$getDept = $db->query("SELECT id FROM department WHERE name='$department' AND college_id=$collegeID");
-	$resultDept = $getDept->fetch();
-	$deptID = $resultDept['id'];
-	printf("Department id: %d\n", $deptID);
+// department id
+$getDept = $db->query("SELECT id FROM department WHERE name='$department' AND college_id=$collegeID");
+$resultDept = $getDept->fetch();
+$deptID = $resultDept['id'];
+printf("Department id: %d\n", $deptID);
 
-	/* professor id */
-	$getProf = $db->query("SELECT id FROM professor WHERE dept_id=$deptID AND name='$professor'");
-	$resultProf = $getProf->fetch();
-	$profID = $resultProf['id'];
-	printf("Professor id: %d\n", $profID);
+// professor id
+$getProf = $db->query("SELECT id FROM professor WHERE dept_id=$deptID AND name='$professor'");
+$resultProf = $getProf->fetch();
+$profID = $resultProf['id'];
+printf("Professor id: %d\n", $profID);
 
-	/* course id */
-	$getCourse = $db->query("SELECT id FROM course WHERE name = '$course'  AND dept_id='$deptID'");
-	$resultCourse = $getCourse->fetch();
-	$courseID = $resultCourse['id'];
-	printf("Course id: %d\n", $courseID);
+// course id
+$getCourse = $db->query("SELECT id FROM course WHERE name = '$course'  AND dept_id='$deptID'");
+$resultCourse = $getCourse->fetch();
+$courseID = $resultCourse['id'];
+printf("Course id: %d\n", $courseID);
 
 echo "".$profID;
 echo "".$courseID;
