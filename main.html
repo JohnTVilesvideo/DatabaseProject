@@ -18,7 +18,7 @@ input[type=text].main {
 }
 input[type=text].dept {
 	width: 25%;
-    padding: 15px 15px 15px 40px;
+    padding: 15px 15px 15px 60px;
     margin: auto;
 	font-size: 20px;
 	
@@ -44,18 +44,26 @@ input[type=text].dept {
 </nav>
 <h1 style="text-align: center; padding: 20px">Rate My Professor</h1>
 
-<form id='main' method='POST' action='Search.php' accept-charset="UTF-8">
+<form id='searchCollegeProfessor' method='POST' action='Search.php' accept-charset="UTF-8">
 
-<div id='prof_col' style='padding:40px' class='center'><input type='text' name='query' placeholder='Search College/Professor' class='main'></input></div>
+    <div id='prof_col' style='padding:40px' class='center'><input type='text' name='query'
+                                                                  placeholder='Search College/Professor' class='main'>
 
-<hr width='70%'>
+        <br style="   display: block; margin: 10px 0;">
+        <input type='submit' value='Search' style="padding:5px 20px; font-size:20px">
 
-<div id='course' class='center'>
-<p style="font-size:30" class='center'>Search by Department</p>
-<input type='text' name='College' placeholder="College Name" class="dept center">
-<input type='text' name='Department' placeholder="Department Name" class="dept center">
-<br style="   display: block; margin: 10px 0;">
-<input type='submit' value='Search' class='center' style="padding:5px 20px; font-size:20px">
+    </div>
+
+    <hr width='70%'>
+</form>
+<form id='searchDepartment' method='POST' action='Search.php' accept-charset="UTF-8">
+    <div id='course' class='center'>
+        <p style="font-size:30">Search by Department</p>
+        <input type='text' name='College' placeholder="College Name" class="dept">
+        <input type='text' name='Department' placeholder="Department Name" class="dept">
+        <br style="   display: block; margin: 10px 0;">
+        <input type='submit' value='Search' style="padding:5px 20px; font-size:20px">
+    </div>
 </form>
 
 </body>
