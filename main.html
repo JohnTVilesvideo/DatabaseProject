@@ -1,13 +1,62 @@
 <html>
 <head>
 <title>Rate Instructor</title>
+<style>
+input[type=text].main {
+	width: 50%;
+    padding: 20px 20px 20px 60px;
+    margin: auto;
+	font-size: 25px;
+	
+	box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 20px;
+	background-image: url('http://www.clker.com/cliparts/z/1/T/u/9/2/search-icon-th.png');
+	background-size: 30px 30px;
+    background-position: 15px 20px; 
+    background-repeat: no-repeat;	
+}
+input[type=text].dept {
+	width: 25%;
+    padding: 15px 15px 15px 40px;
+    margin: auto;
+	font-size: 20px;
+	
+	box-sizing: border-box;
+    border: 2px solid black;
+    border-radius: 20px;
+	background-image: url('http://www.clker.com/cliparts/z/1/T/u/9/2/search-icon-th.png');
+	background-size: 20px 20px;
+    background-position: 15px 18px; 
+    background-repeat: no-repeat;	
+}
+
+.center {
+	text-align:center
+}
+
+</style>
 </head>
 <body>
-<h1>Main Page</h1>
-<br>
-<a href="login.html">Login</a>
-<a href="signup.html">Sign Up</a>
-<a href="professor_review.php">Review a professor</a>
-<a href="course_review.php">Review a course</a>
+<nav style="text-align: right">
+	<a href="login.html">Login</a> |
+	<a href="signup.html">Sign Up</a>
+</nav>
+<h1 style="text-align: center; padding: 20px">Rate My Professor</h1>
+
+<form id='main' method='POST' action='Search.php' accept-charset="UTF-8">
+
+<div id='prof_col' style='padding:40px' class='center'><input type='text' name='query' placeholder='Search College/Professor' class='main'></input></div>
+
+<hr width='70%'>
+
+<div id='course' class='center'>
+<p style="font-size:30" class='center'>Search by Department</p>
+<input type='text' name='College' placeholder="College Name" class="dept center">
+<input type='text' name='Department' placeholder="Department Name" class="dept center">
+<br style="   display: block; margin: 10px 0;">
+<input type='submit' value='Search' class='center' style="padding:5px 20px; font-size:20px">
+</form>
+
 </body>
 </html>
