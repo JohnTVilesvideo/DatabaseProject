@@ -37,8 +37,8 @@ $(document).ready(function(){
 <body>
 
 <h2 style="text-align: center">Review of Professor </h2>
-<h1 style="text-align: center"><?php printf("%s",$_SESSION['prof']); ?></h1>
-<h2 style="text-align: center"><?php printf("%s Department, %s", $_SESSION['dept'], $_SESSION['col']); ?></h2>
+<h1 style="text-align: center"><?php printf("%s",$_POST['prof']); ?></h1>
+<h2 style="text-align: center"><?php printf("%s Department, %s", $_POST['dept'], $_POST['col']); ?></h2>
 <form id='profReview' method='POST' action='add_professor_review.php' accept-charset="UTF-8">
 <!--<input type="hidden" name="profID">
 <input type="hidden" name="courseID">-->
@@ -130,31 +130,11 @@ $(document).ready(function(){
 		</td>
 	</tr>
 </table>
+<?php
+printf("<input type='hidden' name='prof_id' value='%s'>",$_POST['prof_id']);
+printf("<input type='hidden' name='dept_id' value='%s'>",$_POST['dept_id']);
+?>
 </form>
-
-<a href="logout.php">Logout</a>
-<script>
-document.getElementById("usePrev").addEventListener("click", function(){
-	if (sessionStorage.getItem('professor') != null) {
-		var college = sessionStorage.getItem('college');
-		var dept = sessionStorage.getItem('department');
-		var course = sessionStorage.getItem('course');
-		var prof = sessionStorage.getItem('professor');
-		var profID = sessionStorage.getItem('profID');
-		var courseID = sessionStorage.getItem('courseID');
-		//console.log(document.getElementById("profReview")["college"].value);
-		//console.log(college);
-	
-		document.getElementById("profReview").elements["college"].value = college;
-		document.getElementById("profReview").elements["department"].value = dept;
-		document.getElementById("profReview").elements["course"].value = course;
-		document.getElementById("profReview").elements["professor"].value = prof;
-		document.getElementById("profReview").elements["profID"].value = profID;
-		document.getElementById("profReview").elements["courseID"].value = courseID;
-	}
-});
-
-</script>
 </body>
 </html>
 

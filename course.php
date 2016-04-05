@@ -31,6 +31,7 @@ $course = $result->fetch();
 </head>
 <body>
 <?php
+printf("<form method='POST' action='course_review.php'>");
 printf("<table align='center' cellspacing='0' cellpadding='4'>");
 printf("<tr><td><h1>%s (%s)</h1></td></tr>", $course['name'], $course['code']);
 $query = "SELECT college.id AS col_id, college.name AS col_name, department.id AS dept_id, department.name AS dept_name".
@@ -39,22 +40,21 @@ $query = "SELECT college.id AS col_id, college.name AS col_name, department.id A
 $result = $db->query($query);
 $course_info = $result->fetch();
 
-/**
-* I added these to your code since I need these information for the review parts
-* I don't want to do query again each time I want to get these information
-*/
-$_SESSION['col'] = $course_info['col_name'];
-$_SESSION['col_id'] = $course_info['col_id'];
-$_SESSION['dept'] = $course_info['dept_name'];
-$_SESSION['dept_id'] = $course_info['dept_id'];
-$_SESSION['course'] = $course['name'];
-$_SESSION['course_id'] = $id;
-/*************************************************************************************/
-
 printf("<tr><td><h2><a href='college.php?id=%s'>%s</a> </h2></td></tr>", $course_info['col_id'], $course_info['col_name']);
 printf("<tr><td><h2><a href='department.php?id=%s'>%s</a> </h2></td></tr>", $course_info['dept_id'], $course_info['dept_name']);
 printf("<tr><td><a href='course_review.php'><button >Rate this Course</button></a></td></tr>");
 printf("</table>");
+/**
+* Information passed on to course_review.php
+*/
+printf("<tr><td><input type='hidden' name='col' value='%s'></td></tr>",$course_info['col_name']);
+printf("<tr><td><input type='hidden' name='col_id' value='%s'></td></tr>",$course_info['col_id']);
+printf("<tr><td><input type='hidden' name='dept' value='%s'></td></tr>",$course_info['dept_name']);
+printf("<tr><td><input type='hidden' name='dept_id' value='%s'></td></tr>",$course_info['dept_id']);
+printf("<tr><td><input type='hidden' name='course' value='%s'></td></tr>",$course['name']);
+printf("<tr><td><input type='hidden' name='course_id' value='%s'></td></tr>",$id);
+/*************************************************************************************/
+printf("</form>");
 ?>
 <h2><p align="center">Reviews for <?php printf("%s", $course['name']); ?></p></h2>
 <table align="center" cellspacing="0" cellpadding="4" border="1">

@@ -5,8 +5,8 @@ session_start();
 //print_r($_POST);
 echo "user id: \n" . $_SESSION['user_id'];
 $user_id = $_SESSION['user_id'];
-$prof_id = $_SESSION['prof_id'];
-$dept_id = $_SESSION['dept_id'];
+$prof_id = $_POST['prof_id'];
+$dept_id = $_POST['dept_id'];
 $course = $_POST['course'];
 $profReview = $_POST['professorReview'];
 $helpfulness = $_POST['helpfulness'];
@@ -14,8 +14,8 @@ $clarity = $_POST['clarity'];
 $easiness = $_POST['easiness'];
 $overall = $_POST['overall'];
 
-printf("Department id: %d\n", $_SESSION['dept_id']);
-printf("Professor id: %d\n", $_SESSION['prof_id']);
+printf("Department id: %d\n", $_POST['dept_id']);
+printf("Professor id: %d\n", $_POST['prof_id']);
 
 // course id
 $getCourse = $db->query("SELECT id FROM course WHERE name = '$course'  AND dept_id='$dept_id'");

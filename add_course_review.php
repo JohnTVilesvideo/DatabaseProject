@@ -5,9 +5,9 @@ session_start();
 
 //print_r($_POST);
 $user_id = $_SESSION['user_id'];
-$course_id = $_SESSION['course_id'];
-$dept_id = $_SESSION['dept_id'];
-$course = $_SESSION['course'];
+$course_id = $_POST['course_id'];
+$dept_id = $_POST['dept_id'];
+$course = $_POST['course'];
 
 $professor = $_POST['professor'];
 $textbook = $_POST['isTextRequired'];

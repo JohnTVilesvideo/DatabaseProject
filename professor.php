@@ -30,6 +30,7 @@ $professor = $result->fetch();
 </head>
 <body>
 <?php
+printf("<form method='POST' action='professor_review.php'>");
 printf("<table align='center' cellspacing='0' cellpadding='4'>");
 printf("<tr><td><h1>%s</h1></td></tr>", $professor['name']);
 $query = "SELECT college.id AS col_id, college.name AS col_name, department.id AS dept_id, department.name AS dept_name".
@@ -38,22 +39,21 @@ $query = "SELECT college.id AS col_id, college.name AS col_name, department.id A
 $result = $db->query($query);
 $professor_info = $result->fetch();
 
-/**
-* I added these to your code since I need these information for the review parts
-* I don't want to do query again each time I want to get these information
-*/
-$_SESSION['col'] = $professor_info['col_name'];
-$_SESSION['col_id'] = $professor_info['col_id'];
-$_SESSION['dept'] = $professor_info['dept_name'];
-$_SESSION['dept_id'] = $professor_info['dept_id'];
-$_SESSION['prof'] = $professor['name'];
-$_SESSION['prof_id'] = $id;
-/*************************************************************************************/
-
 printf("<tr><td><h2><a href='college.php?id=%s'>%s</a> </h2></td></tr>", $professor_info['col_id'], $professor_info['col_name']);
 printf("<tr><td><h2><a href='department.php?id=%s'>%s</a> </h2></td></tr>", $professor_info['dept_id'], $professor_info['dept_name']);
-printf("<tr><td><a href='professor_review.php'><button>Rate this professor</button></a></td></tr>");
+printf("<tr><td><input type='submit' value='Rate this professor'></td></tr>");
 printf("</table>");
+/**
+* Information passed on to professor_review.php
+*/
+printf("<tr><td><input type='hidden' name='col' value='%s'></td></tr>",$professor_info['col_name']);
+printf("<tr><td><input type='hidden' name='prof' value='%s'></td></tr>",$professor['name']);
+printf("<tr><td><input type='hidden' name='col_id' value='%s'></td></tr>",$professor_info['col_id']);
+printf("<tr><td><input type='hidden' name='dept' value='%s'></td></tr>",$professor_info['dept_name']);
+printf("<tr><td><input type='hidden' name='dept_id' value='%s'></td></tr>",$professor_info['dept_id']);
+printf("<tr><td><input type='hidden' name='prof_id' value='%s'></td></tr>",$id);
+/*************************************************************************************/
+printf("</form>");
 ?>
 <h2><p align="center">Reviews for <?php printf("%s", $professor['name']); ?></p></h2>
 <table align="center" cellspacing="0" cellpadding="4" border="1">
