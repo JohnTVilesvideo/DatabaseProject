@@ -14,7 +14,7 @@ if ($result->rowCount() > 0) {
 	if ($result) {
 		echo '<script language="javascript">
 			alert("The course is successfully added");
-			window.location.href = "main.php";
+			window.location.href = "main.html";
 		</script>';
 	}
 	else {
