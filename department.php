@@ -46,6 +46,7 @@ if (!(substr($website, 0, 4) == "http")) {
     $website = "http://" . $website;
 }
 printf("<tr><td><h2> Department Website : <a href='%s'>%s</a></h2></td></tr>", $website, $website);
+printf("<tr><td><h3> Don't find your professor or course? Add your <a href='add_prof.php'>professor</a> or <a href='add_course.php'>course</a></tr>");
 printf("</table>");
 ?>
 

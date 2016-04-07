@@ -63,6 +63,7 @@ else{
     $profCount = $result->rowCount();
     if($profCount != 0){
         printf("<h2><p align='center'>Professors</p></h2> <br>");
+		echo "<h3 style='text-align:center'>Can't find your professor? <a href='add_prof.php'>Add your own</a></h3>";
         printf("<table  align='center' cellspacing='0' cellpadding='4'>");
         foreach ($result as $row){
             $profName = $row['name'];
@@ -103,6 +104,7 @@ else{
     }
     if($profCount + $colCount == 0){
         echo "<h3><p align='center'>Sorry, Your search didn't return any results.</p></h3>";
+		echo "<h3 style='text-align:center'><a href='add_prof.php'>Add a new professor</a></h3>";
     }
 }
 
