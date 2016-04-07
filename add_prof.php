@@ -53,7 +53,7 @@ style='padding: 30px 0px 20px'>
 	</tr>
 	<tr>
 		<td><p>Professor Name: </p></td>
-		<td><input type='text' name='name' placeholder="Course Full Name" required></td>
+		<td><input type='text' name='name' placeholder="Professor Full Name" required></td>
 	</tr>
 	<tr>
 		<td></td>
