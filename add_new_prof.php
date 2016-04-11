@@ -13,7 +13,7 @@ if ($result->rowCount() > 0) {
 	if ($result) {
 		echo '<script language="javascript">
 			alert("New professor is successfully added");
-			window.location.href = "main.php";
+			window.location.href = "main.html";
 		</script>';
 	}
 	else {
