@@ -28,7 +28,7 @@ if ($isCourse) {
     $courseCount = $result->rowCount();
     if ($courseCount > 0) {
         echo "<h2><p align='center'>Courses</p></h2>";
-        printf("<table  align='center' cellspacing='0' cellpadding='4'>");
+        printf("<table class='table'>");
     }
     foreach ($result as $row) {
         $courseID = $row['courseID'];
@@ -38,7 +38,7 @@ if ($isCourse) {
         $collegeID = $row['collegeID'];
         $collegeName = $row['collegeName'];
         printf("<tr><td><h3><p><a href='course.php?id=$courseID'>$courseName</a></p></h3><h4><p><a href='department.php?id=$deptID'>$deptName</a>" .
-            "</p><p><a href='college.php?id=$collegeID'>$collegeName</a> </p></h4></td><td><form class='navbar-form' method='POST' action='course_review.php'>" .
+            "</p><p><a href='college.php?id=$collegeID'>$collegeName</a> </p></h4></td><td><form class='navbar-form' method='POST' action='course-review.php'>" .
             "<input type='hidden' name='course_id' value='$courseID'><button type='success'class='btn btn-primary btn-md'>Rate this Course</button></form></td></tr>");
     }
     if ($courseCount > 0) {
@@ -66,7 +66,7 @@ if ($isCourse) {
                 if (!$headerSet) {
                     $headerSet = true;
                     echo "<h2><p align='center'>Departments</p></h2>";
-                    printf("<table  align='center' cellspacing='0' cellpadding='4'>");
+                    printf("<table class='table'>");
                 }
                 foreach ($depts as $dep) {
                     $deptID = $dep['id'];

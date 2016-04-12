@@ -35,13 +35,18 @@
         if ($loginFailed) {
             printf("<div class='alert alert-danger'> <strong>Login Failed !</strong> Username and Password you provided do not match.<br> Please try again.</div>");
         }
+        if (array_key_exists('signup_success', $_SESSION)) {
+            unset($_SESSION['signup_success']);
+            printf("<div class='alert alert-success'> <strong>Sign up Successful !</strong> You have successfully signed up." .
+                " Please use your username and password to log in.</div>");
+        }
         ?>
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="hidden" name="referer" value="<?php echo $lastPage; ?>">
         <input type="username" name='username' class="form-control" placeholder="Username" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p align="center"><a href="#">Register</a> - <a href="#">Forgot Password</a></p>
+        <p align="center"><a href="signup.php">Register</a> - <a href="#">Forgot Password</a></p>
     </form>
 
 </div> <!-- /container -->

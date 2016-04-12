@@ -45,7 +45,7 @@ if (array_key_exists('user_id', $_SESSION)) {
                 } else {
 
                     printf("<a href='login.php'><button type='button' class='btn btn-default navbar-btn'>Log in</button></a>");
-                    printf("<a href='#'><button type='button' class='btn btn-default navbar-btn'>Sign up</button></a>");
+                    printf("<a href='signup.php'><button type='button' class='btn btn-default navbar-btn'>Sign up</button></a>");
                 }
                 ?>
             </ul>
