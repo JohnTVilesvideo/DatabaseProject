@@ -9,6 +9,8 @@
     include_once('db_connect.php');
     include_once('links.html');
     include('nav.php');
+
+
     if (array_key_exists('redirect', $_SESSION)) {
         $lastPage = $_SESSION['redirect'];
     } else if (array_key_exists('HTTP_REFERER', $_SERVER)) {
@@ -40,7 +42,21 @@
             printf("<div class='alert alert-success'> <strong>Sign up Successful !</strong> You have successfully signed up." .
                 " Please use your username and password to log in.</div>");
         }
+
+        // Test redirect from $_GET
+        echo '<input type="hidden" name="location" value="';
+        if(isset($_GET['location'])) {
+            echo htmlspecialchars($_GET['location']);
+        }
+        if(isset($_GET['id'])) {
+            echo "?id=" . htmlspecialchars($_GET['id']);
+        }
+        echo '" />';
+        //  Will show something like this:
+        //  <input type="hidden" name="location" value="course-review.php?id=1" />
+        /************************************************/
         ?>
+        
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="hidden" name="referer" value="<?php echo $lastPage; ?>">
         <input type="username" name='username' class="form-control" placeholder="Username" required autofocus>
