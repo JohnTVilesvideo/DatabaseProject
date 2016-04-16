@@ -54,7 +54,7 @@
         echo '" />';
         //  Will show something like this:
         //  <input type="hidden" name="location" value="course-review.php?id=1" />
-        /*************************************************/
+        /**************************************************/
         ?>
 
         <h2 class="form-signin-heading">Please sign in</h2>

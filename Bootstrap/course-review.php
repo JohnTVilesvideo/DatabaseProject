@@ -9,7 +9,7 @@
 
     $id = NULL;
     if (!isset($_SESSION['user_id'])) {
-        $id = $_POST['course_id'];  // TODO might have to check this again
+        $id = $_POST['course_id']; 
         header("Location:login.php?location=" . urlencode($_SERVER['REQUEST_URI']) . "&id=" . urlencode($id));
     }
     if (isset($_GET['id'])) {
@@ -17,7 +17,7 @@
     }
     $query = "SELECT course.name AS courseName, course.dept_id AS deptID, department.name AS deptName, college.name AS collegeName, college.id FROM (course JOIN department on course.dept_id=department.id) JOIN college ON department.college_id=college.id WHERE course.id=$id;";
     $result = $db->query($query);
-    $result = $result->fetch();  
+    $result = $result->fetch();
     $courseName = $result['courseName'];
     $deptName = $result['deptName'];
     $colName = $result['collegeName'];

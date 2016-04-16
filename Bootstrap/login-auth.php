@@ -37,7 +37,7 @@ if ($result->rowCount() != 0) {
     if (array_key_exists('redirect', $_SESSION)) {
         unset($_SESSION['redirect']);
     }
-    header($url);**/
+    header($url);***/
 } else {
     $_SESSION['login_failed'] = true;
     $_SESSION['redirect'] = $_POST['referer'];
