@@ -6,106 +6,168 @@
     include_once('links.html');
     include('nav.php');
 
-
-    $id = NULL;
     if (!isset($_SESSION['user_id'])) {
-        $id = $_POST['course_id']; 
-        header("Location:login.php?location=" . urlencode($_SERVER['REQUEST_URI']) . "&id=" . urlencode($id));
+        $_SESSION['redirect'] = $_SERVER['HTTP_REFERER'];
+        //TODO:Some sort of message in login page telling them that they need to log in
+        header('Location:login.php');
     }
-    if (isset($_GET['id'])) {
-           $id = $_GET['id'];
+    if (array_key_exists('course_id', $_POST)) {
+        $id = $_POST['course_id'];
+    } else if (array_key_exists('courseID', $_SESSION)) {
+        $id = $_SESSION['courseID'];
+        unset($_SESSION['courseID']);
     }
-    $query = "SELECT course.name AS courseName, course.dept_id AS deptID, department.name AS deptName, college.name AS collegeName, college.id FROM (course JOIN department on course.dept_id=department.id) JOIN college ON department.college_id=college.id WHERE course.id=$id;";
+    $query = "SELECT course.name AS courseName, course.dept_id AS deptID, department.name AS deptName, college.name AS collegeName, college.id AS collegeID FROM (course JOIN department ON course.dept_id=department.id) JOIN college ON department.college_id=college.id WHERE course.id=$id;";
     $result = $db->query($query);
     $result = $result->fetch();
     $courseName = $result['courseName'];
+    $deptID = $result['deptID'];
     $deptName = $result['deptName'];
-    $colName = $result['collegeName'];
+    $collegeName = $result['collegeName'];
+    $collegeID = $result['collegeID'];
+
+    $addFailed = false;
+    if (array_key_exists('add-failed', $_SESSION)) {
+        unset($_SESSION['add-failed']);
+        $addFailed = true;
+        $easiness = $_SESSION['easiness'];
+        unset($_SESSION['easiness']);
+        $profID = $_SESSION['profID'];
+        unset($_SESSION['profID']);
+        $textbookRequired = $_SESSION['textbook_required'];
+        unset($_SESSION['textbook_required']);
+        $courseReview = $_SESSION['course_review'];
+        unset($_SESSION['course_review']);
+        $helpfulness = $_SESSION['helpfulness'];
+        unset($_SESSION['helpfulness']);
+        $tips = $_SESSION['tips'];
+        unset($_SESSION['tips']);
+        $overallRating = $_SESSION['overall_rating'];
+        unset($_SESSION['overall_rating']);
+    }
+
     ?>
+    <link rel="stylesheet" href="css/star-rating.css">
+    <script src="js/star-rating.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap-toggle.css">
+    <script src="js/bootstrap-toggle.js"></script>
+
     <title>
-        Add a review for <?php echo "" . $name ?>
+        <?php
+        printf("Add a review for %s course of %s Department, %s ", $courseName, $deptName, $collegeName);
+        ?>
     </title>
-</head>
+
 <body>
+<div class="container">
+    <?php
+    printf("<h3 style='text-align: center'>Add a review for<br> <a href='course.php?id=$id'>$courseName</a><br>" .
+        "<a href='department.php?id=$deptID'>$deptName</a>, <a href='college.php?id=$collegeID'>$collegeName</a>")
+    ?>
+</div>
 
-<h2 style="text-align: center">Review of</h2>
-<h1 style="text-align: center"><?php printf("%s",$courseName); ?></h1>
-<h2 style="text-align: center"><?php printf("%s Department, %s", $deptName, $colName); ?></h2>
-<form id='courseReview' method='POST' action='add_course_review.php' accept-charset="UTF-8">
-<table style="float:center">
-	<tr>
-		<td>
-		<table>
-		<tr>
-			<td><input type='text' id='professor' name='professor' placeholder='Taken with Professor' required></td>
-		</tr>
-		</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-		<table>
-		<tr>
-			<td><p>Easiness:</p></td>
-			<td align='left'>
-				<input type='radio' name='easiness' value=1 required>
-				<input type='radio' name='easiness' value=2 required>
-				<input type='radio' name='easiness' value=3 required>
-				<input type='radio' name='easiness' value=4 required>
-				<input type='radio' name='easiness' value=5 required>
-			</td>
-		</tr>
-		</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-		<table>
-		<tr>
-			<td><p>Textbook required:</p></td>
-			<td><input type="radio" name="isTextRequired" value=1 required>Yes
-		    	    <input type="radio" name="isTextRequired" value=0 required> No</td>
-		</tr>
-		</table>
-		</td>
-	</tr>
+<div class="jumbotron">
+    <form class="form-horizontal" role="form" method="POST" action="add-course-review.php">
+        <?php
+        if ($addFailed) {
+            printf("<div class='alert alert-danger'> <strong>Add review failed !</strong> Your have already reviewed this course taken with the selected professor. Please select a different professor or edit your review for this course taken with selected professor in your profile page.</div>");
+        }
+        ?>
+        <input type="hidden" name="courseID" value="<?php echo $id; ?>">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Professor:</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="profID" required>
+                    <?php
+                    $query = "SELECT * FROM professor WHERE dept_id=$deptID;";
+                    $result = $db->query($query);
+                    foreach ($result as $row) {
+                        if ($addFailed && $row['id'] == $profID) {
+                            printf("<option value='%d' selected>%s</option>", $row['id'], $row['name']);
+                        } else {
+                            printf("<option value='%d'>%s</option>", $row['id'], $row['name']);
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <label class="control-label">Professor not on the list? <a
+                    href="add-professor.php?deptID=<?php echo $deptID; ?>">Click here to
+                    add.</a></label>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Easiness:</label>
+            <div class="col-sm-4">
+                <input type="number" name="easiness" class="rating" min=0 max=5 step=1 data-size="sm" data-rtl="false"
+                    <?php if ($addFailed) {
+                        echo "value=" . $easiness;
+                    } ?> required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Textbook required:</label>
+            <div class="col-sm-4">
+                <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No"
+                       name="textbook_required" <?php if (!$addFailed || $textbookRequired == 'on') {
+                    echo 'checked';
+                } else {
+                    echo 'unchecked';
+                } ?> formnovalidate>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Course Review:</label>
+            <div class="col-sm-4">
+                <textarea class="form-control" name="course_review" rows="5" placeholder="Course Review"
+                          required><?php if ($addFailed) {
+                        echo $courseReview;
+                    } ?></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Usefulness (Optional):</label>
+            <div class="col-sm-4">
+                <textarea class="form-control" name="helpfulness"
+                          placeholder="How helpful was the course? (Eg: Was the course helpful towards your major? Did you learn new skills?)"
+                          rows="2" required><?php if ($addFailed) {
+                        echo $helpfulness;
+                    } ?></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Tips (Optional):</label>
+            <div class="col-sm-4">
+                <textarea class="form-control" name="tips"
+                          placeholder="Any tips for students taking or planning to take this course?"
+                          rows="2" required><?php if ($addFailed) {
+                        echo $helpfulness;
+                    } ?></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Overall Rating:</label>
+            <div class="col-sm-4">
+                <input type="number" name="overall_rating" class="rating" min=0 max=5 step=1 data-size="sm"
+                       data-rtl="false" <?php if ($addFailed) {
+                    echo "value=" . $overallRating;
+                } ?> required>
+            </div>
+        </div>
 
-	<tr>
-		<td><textarea rows=10 cols=50 form='courseReview' name='review' placeholder="Course Review" required></textarea></td>
-	</tr>
-	<tr>
-		<td><textarea rows=5 cols=50 form='courseReview' name='usefulness' placeholder="(Optional) How helpful was the course to you? (e.g. matter to your major, teach you a new skill, ...)"></textarea></td>
-	</tr>
-	<tr>
-		<td><textarea rows=5 cols=50 form='courseReview' name='tips' placeholder="(Optional) What are some tips you might have for other people who are going to take the course?"></textarea></td>
-	</tr>
-	<tr>
-		<td>
-		<table>
-		<tr>
-			<td><p>Overall Rating:</p></td>
-			<td align='left'>
-				<input type='radio' name='overall' value=1 required>
-				<input type='radio' name='overall' value=2 required>
-				<input type='radio' name='overall' value=3 required>
-				<input type='radio' name='overall' value=4 required>
-				<input type='radio' name='overall' value=5 required>
-			</td>
-		</tr>
-		</table>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<table>
-				<tr>
-					<td><input type='submit' value='Submit'></td>
-					<td align="center"><input type="reset" value="Clear all"/></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-</form>
+        <div class="form-group">
+            <div class="col-sm-4" align="center">
+                <input class="btn default" type="submit" value="Submit">
+                <input class="btn btn-danger" type="reset" value="Reset">
+            </div>
+
+        </div>
+    </form>
+
+
+</div>
+
+
 </body>
+</head>
 </html>

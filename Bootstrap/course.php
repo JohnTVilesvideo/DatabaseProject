@@ -57,6 +57,10 @@ $course = $result->fetch();
 <div class="col-xs-12 col-sm-9">
     <div class="container">
         <?php
+        if (array_key_exists('review_added', $_SESSION)) {
+            unset($_SESSION['review_added']);
+            printf("<div class='alert alert-success'> <strong>Review Added successfully!</strong> Thank you.<br></div>");
+        }
         printf("<table align='center'>");
         printf("<tr><td><h2>%s (%s)</h2></td></tr>", $course['name'], $course['code']);
         $query = "SELECT college.id AS col_id, college.name AS col_name, department.id AS dept_id, department.name AS dept_name" .
