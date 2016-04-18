@@ -26,40 +26,79 @@
         $collegeID = $result['collegeID'];
         $collegeName = $result['collegeName'];
     }
+
+    $addFailed = false;
+    if (array_key_exists('add-failed', $_SESSION)) {
+        unset($_SESSION['add-failed']);
+        $addFailed = true;
+        if (!$deptGiven) {
+            $collegeName = $_SESSION['collegeName'];
+        }
+        unset($_SESSION['collegeName']);
+        if (!$deptGiven) {
+            $deptName = $_SESSION['deptName'];
+        }
+        unset($_SESSION['deptName']);
+        $courseName = $_SESSION['courseName'];
+        unset($_SESSION['courseName']);
+        $courseCode = $_SESSION['courseCode'];
+        unset($_SESSION['courseCode']);
+    }
     ?>
 </head>
 
 <body>
 <div class="jumbotron">
     <h3 align="center">Add new Course</h3>
-    <form class="form-horizontal" role="form" method="POST" action="add-course-review.php">
+    <form class="form-horizontal" role="form" method="POST" action="add-course-auth.php">
         <?php
+        if ($addFailed) {
+            printf($_SESSION['error-message']);
+            unset($_SESSION['error-message']);
+        }
         if ($deptGiven) {
             printf("<input type='hidden' name='dept_id' value='$deptID'>");
         }
         ?>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="email">College:</label>
+            <label class="control-label col-sm-2">College:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="collegeName" <?php if ($deptGiven) {
-                    echo "value='$collegeName' disabled";
-                } ?> >
+                <input type="text" class="form-control" name="collegeName"
+                    <?php if ($deptGiven) {
+                        echo "value='$collegeName' disabled";
+                    } else if ($addFailed) {
+                        echo "value='$collegeName'";
+                    }
+                    ?> >
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="email">Department:</label>
+            <label class="control-label col-sm-2">Department:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="deptName" <?php if ($deptGiven) {
-                    echo "value='$deptName' disabled";
-                } ?> >
+                <input type="text" class="form-control" name="deptName"
+                    <?php if ($deptGiven) {
+                        echo "value='$deptName' disabled";
+                    } else if ($addFailed) {
+                        echo "value='$deptName'";
+                    }
+                    ?> >
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="email">Course's Name:</label>
+            <label class="control-label col-sm-2">Course Name:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="profName" required>
+                <input type="text" class="form-control"
+                       name="courseName" <?php if ($addFailed) echo "value='$courseName''"; ?> required>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Course Code:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control"
+                       name="courseCode" <?php if ($addFailed) echo "value='$courseCode''"; ?> required>
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-sm-4" align="center">
                 <input class="btn default" type="submit" value="Submit">
@@ -69,8 +108,6 @@
         </div>
     </form>
     <div class="container">
-
-
     </div> <!-- /container -->
 
 </body>
