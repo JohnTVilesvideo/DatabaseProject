@@ -6,16 +6,26 @@
     include_once('links.html');
     include('nav.php');
 
-    if (!isset($_SESSION['user_id'])) {
-        $_SESSION['redirect'] = $_SERVER['HTTP_REFERER'];
-        //TODO:Some sort of message in login page telling them that they need to log in
-        header('Location:login.php');
-    }
+    $id = 0;
     if (array_key_exists('professor_id', $_POST)) {
+        $id = $_POST['professor_id'];
+    }
+    if (!isset($_SESSION['user_id'])) {
+        /*$_SESSION['redirect'] = $_SERVER['HTTP_REFERER'];
+        //TODO:Some sort of message in login page telling them that they need to log in
+        header('Location:login.php');*/
+
+        header("Location:login.php?location=" . urlencode($_SERVER['REQUEST_URI']) . "&id=" . urlencode($id));
+    }
+    /*if (array_key_exists('professor_id', $_POST)) {
         $id = $_POST['professor_id'];
     } else if (array_key_exists('professorID', $_SESSION)) {
         $id = $_SESSION['professorID'];
         unset($_SESSION['professorID']);
+    }*/
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        echo "" . $id;
     }
     $query = "SELECT professor.name AS professorName, professor.dept_id AS deptID, department.name AS deptName, college.name AS collegeName, college.id AS collegeID FROM (professor JOIN department ON professor.dept_id=department.id) JOIN college ON department.college_id=college.id WHERE professor.id=$id;";
     $result = $db->query($query);
@@ -143,7 +153,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-4" align="center">
-                <input class="btn default" type="submit" value="Submit">
+                <input class="btn btn-default" type="submit" value="Submit">
                 <input class="btn btn-danger" type="reset" value="Reset">
             </div>
 
