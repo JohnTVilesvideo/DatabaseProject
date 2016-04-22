@@ -19,6 +19,7 @@
 
         $lastPage = "http://cs.gettysburg.edu/~dhakam01/cs360/project/Bootstrap/index.php"; //TODO: dynamically figure out the home url
     } */
+    
     if (array_key_exists('login_failed', $_SESSION)) {
         $loginFailed = true;
         unset($_SESSION['login_failed']);
@@ -51,18 +52,26 @@
         if(isset($_GET['id'])) {
             echo "?id=" . htmlspecialchars($_GET['id']);
         }
-        echo '" />';
+        echo '">';
         //  Will show something like this:
         //  <input type="hidden" name="location" value="course-review.php?id=1" />
         /**************************************************/
         ?>
 
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="hidden" name="referer" value="<?php echo $lastPage; ?>">
         <input type="username" name='username' class="form-control" placeholder="Username" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <p align="center"><a href="signup.php">Register</a> - <a href="#">Forgot Password</a></p>
+        <?php
+            printf("<p align='center'><a href='signup.php");
+            if(isset($_GET['location'])) {
+                echo "?location=" . urlencode($_GET['location']);
+            }
+            if(isset($_GET['id'])) {
+                echo "&id=" . urlencode($_GET['id']) . "'";
+            }
+            printf(">Register</a> - <a href='#'>Forgot Password</a></p>");
+        ?>
     </form>
 
 </div> <!-- /container -->

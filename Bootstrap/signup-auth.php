@@ -9,7 +9,16 @@ $username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 $confirm_password = $_POST['confirm_password'];
-$referer = $_POST['referer'];
+//$referer = $_POST['referer'];
+
+$redirect = null;
+$append = null;
+if($_POST['location'] != '') {
+    $redirect = $_POST['location'];
+}
+if ($_POST['append'] != '') {
+    $append = $_POST['append'];
+}
 
 if ($password != $confirm_password) {
     $_SESSION['signup_failed'] = true;
@@ -30,8 +39,7 @@ if ($result->rowCount() > 0) {
 }
 
 if (array_key_exists('signup_failed', $_SESSION)) {
-    $_SESSION['redirect'] = $_POST['referer'];
-    header('Location:signup.php');
+    header('Location:signup.php'.$append);
 } else {
     unset($_SESSION['signup_failed']);
     unset($_SESSION['invalid_username']);
@@ -40,17 +48,21 @@ if (array_key_exists('signup_failed', $_SESSION)) {
     $query = "INSERT INTO user VALUES(DEFAULT, '$username', '$password', '$fname', '$lname', '$email', 'USER');";
     $result = $db->query($query);
     if ($result) {
-        if (substr($referer, 0, 35) != "http://cs.gettysburg.edu/~dhakam01/") {
-            $url = 'Location:index.php';
+        $query = "SELECT * FROM user WHERE username='$username' AND password='$password';";
+        $result = $db->query($query);
+        $user = $result->fetch();
+        $_SESSION['username'] = $username;
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['users_name'] = $fname . " " . $lname;
+
+        if ($redirect == null) {
+            header('Location:index.php');
         } else {
-            $url = 'Location:' . $referer;
+            header('Location:login.php' . $append);
         }
-        $_SESSION['signup_success'] = true;
-        $_SESSION['redirect'] = $_POST['referer'];
-        header('Location:login.php');
+
     } else {
-        $_SESSION['redirect'] = $_POST['referer'];
-        header('Location:signup.php');
+        header('Location:signup.php' . $append);
     }
 }
 ?>

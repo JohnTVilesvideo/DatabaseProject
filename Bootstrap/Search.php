@@ -10,6 +10,10 @@
     include_once('links.html');
     include_once('nav.php');
     ?>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.11/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="js/dataTables.scrollingPagination.js"></script>
+
     <title>Search Result</title>
 </head>
 <body>
@@ -28,7 +32,7 @@ if ($isCourse) {
     $courseCount = $result->rowCount();
     if ($courseCount > 0) {
         echo "<h2><p align='center'>Courses</p></h2>";
-        printf("<table class='table'>");
+        echo "<table id='search' class='table table-striped table-bordered' width='100%' cellspacing='0'>";
     }
     foreach ($result as $row) {
         $courseID = $row['courseID'];
@@ -146,6 +150,13 @@ if ($isCourse) {
 }
 
 ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#search').dataTable( {
+            "pagingType": "scrolling"
+        } );
+    } );
+</script>
 </body>
 
 </html>

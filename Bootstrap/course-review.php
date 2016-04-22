@@ -11,20 +11,11 @@
         $id = $_POST['course_id'];
     }
     if (!isset($_SESSION['user_id'])) {
-        /*$_SESSION['redirect'] = $_SERVER['HTTP_REFERER'];
-        //TODO:Some sort of message in login page telling them that they need to log in
-        header('Location:login.php');*/
-
         header("Location:login.php?location=" . urlencode($_SERVER['REQUEST_URI']) . "&id=" . urlencode($id));
     }
 
-    /*else if (array_key_exists('courseID', $_SESSION)) {
-        $id = $_SESSION['courseID'];
-        unset($_SESSION['courseID']);
-    }*/
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        echo "" . $id;
     }
     $query = "SELECT course.name AS courseName, course.dept_id AS deptID, department.name AS deptName, college.name AS collegeName, college.id AS collegeID FROM (course JOIN department ON course.dept_id=department.id) JOIN college ON department.college_id=college.id WHERE course.id=$id;";
     $result = $db->query($query);
