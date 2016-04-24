@@ -17,25 +17,54 @@
     }
     ?>
 </head>
-<body style="background: url('img/pattern.png');">
+<body>
 <?php
-//TODO: Beautify this part
 $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM user WHERE id=$user_id;";
 $result = $db->query($query);
 $user = $result->fetch();
-printf("<h2 align='center' style='color: dodgerblue'>Profile</h2>");
+$editFailed = array_key_exists('edit-failed', $_SESSION);
+if (array_key_exists('edit', $_POST) || $editFailed) {
+    if ($editFailed) {
+        unset($_SESSION['edit-failed']);
+        printf($_SESSION['error-message']);
+        unset($_SESSION['error-message']);
+    }
+    printf("<h1><p align='center'>Profile</p></h1>");
+    printf("<form class='form' method='post' action='edit-profile.php'>");
+    printf("<table class='table'>");
+    printf("<tr><td><h3>First Name:</h3></td><td><h3><input type='text' placeholder='First name' name='fname' value='%s' required></h3></td></tr>", $user['fname']);
+    printf("<tr><td><h3>Last Name:</h3></td><td><h3><input type='text' placeholder='Last name' name='lname' value='%s' required></h3></td></tr>", $user['lname']);
+    printf("<tr><td><h3>Username:</h3></td><td><h3><input type='text' placeholder='Username' name='username' value='%s' required></h3></td></tr>", $user['username']);
+    printf("<tr><td><h3>Email:</h3></td><td><h3><input type='email' placeholder='Email' name='email' value='%s' required></h3></td></tr>", $user['email']);
+    printf("<tr><td><h3>Password:</h3></td><td><h3><input type='password' name='password' placeholder='Leave blank if unchanged'></h3></td></tr>");
+    printf("<tr><td><h3>Password:</h3></td><td><h3><input type='password' name='confirm_password' placeholder='Leave blank if unchanged'></h3></td></tr>");
+    printf("<tr><td></td><td>");
+    printf("<div class='btn-group'>");
+    printf("<input type='submit' class='btn btn-success' name='submit_button' value='Save'>");
+    printf("<input type='submit' class='btn btn-danger' name='submit_button' style='margin-left: 5px;' value='Cancel'></td></tr>");
+    printf("</table>");
+    printf("</form>");
+    exit(0);
+}
+if (array_key_exists('edit-success', $_SESSION)) {
+    unset($_SESSION['edit-success']);
+    printf("<div class='alert alert-success'> <strong>Your Profile update was successful !</strong></div>");
+}
+printf("<h1><p align='center'>Profile</p></h1>");
 printf("<table class='table'>");
-printf("<tr><td style='padding-left: 5px'><h3>Name:</h3></td><td><h3>%s %s</h3></td></tr>", $user['fname'], $user['lname']);
+printf("<tr><td><h3>Name:</h3></td><td><h3>%s %s</h3></td></tr>", $user['fname'], $user['lname']);
 printf("<tr><td><h3 >Username:</h3></td><td><h3>%s</h3></td></tr>", $user['username']);
-printf("<tr><td><h3>Email:</h3></td><td><h3>%s</h3></td><td><h3><a href='#'>Edit</a> </h3></td></tr>", $user['email']);
-printf("<tr><td><h3>Password:</h3></td><td><h3>**********</h3></td><td><h3><a href='#'>Change</a> </h3></td></tr>");
+printf("<tr><td><h3>Email:</h3></td><td><h3>%s</h3></td></tr>", $user['email']);
+printf("<tr><td><h3>Password:</h3></td><td><h3>**********</h3></td></tr>");
+printf("<tr><td></td><td><form method='post' action='profile.php'><input type='hidden' name='edit' value='true'>" .
+    "<input type='submit' class='btn btn-default' value='Edit Profile'></form></td></tr>");
 printf("</table>");
 ?>
 
-<h2 align="center" style='color: dodgerblue'>Course Reviews</h2>
-<table align="center" cellspacing="0" cellpadding="4" border="1" >
-    <tr style='padding-left: 5px'>
+<h2><p align="center">Course Reviews</p></h2>
+<table class="table">
+    <tr>
         <th>Details</th>
         <th>Reviews</th>
         <th>Ratings</th>
@@ -67,8 +96,8 @@ printf("</table>");
     ?>
 </table>
 
-<h2><p align="center" style='color: dodgerblue'>Professor Reviews</p></h2>
-<table align="center" cellspacing="0" cellpadding="4" border="1">
+<h2><p align="center">Professor Reviews</p></h2>
+<table class="table">
     <tr>
         <th>Details</th>
         <th>Reviews</th>

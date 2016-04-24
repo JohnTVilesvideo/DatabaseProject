@@ -37,7 +37,7 @@ if ($result->rowCount() != 0) {
         header("Location:login.php?location=". $redirect);
     }
     else {
-        header("Location:index.php");
+        header("Location:login.php");
     }
 }
 ?>
