@@ -70,7 +70,7 @@
             if(isset($_GET['id'])) {
                 echo "&id=" . urlencode($_GET['id']) . "'";
             }
-            printf(">Register</a> - <a href='#'>Forgot Password</a></p>");
+            printf(">Register</a><a href='#'>Forgot Password</a></p>");
         ?>
     </form>
 
