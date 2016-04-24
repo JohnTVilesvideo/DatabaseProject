@@ -47,7 +47,7 @@
     ?>
 </head>
 
-<body>
+<body style="background: url('img/pattern.png');">
 <div class="jumbotron">
     <h3 align="center">Add new Course</h3>
     <form class="form-horizontal" role="form" method="POST" action="add-course-auth.php">
@@ -101,7 +101,7 @@
 
         <div class="form-group">
             <div class="col-sm-4" align="center">
-                <input class="btn default" type="submit" value="Submit">
+                <input class="btn btn-default" type="submit" value="Submit">
                 <input class="btn btn-danger" type="reset" value="Reset">
             </div>
 

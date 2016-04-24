@@ -23,7 +23,7 @@ $course = $result->fetch();
 <head>
     <title><?php echo 'Rate my Professor | ' . $course['name'] ?></title>
 </head>
-<body>
+<body style="background: url('img/pattern.png');">
 
 <!-- sidebar -->
 <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">

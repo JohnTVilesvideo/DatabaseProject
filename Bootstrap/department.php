@@ -24,7 +24,7 @@
 
     <title><?php echo 'Rate my Professor | ' . $department['name'] . ' (' . $department['code'] . ')' ?></title>
 </head>
-<body>
+<body style="background: url('img/pattern.png');">
 <!-- sidebar -->
 <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
     <div class="jumbotron">

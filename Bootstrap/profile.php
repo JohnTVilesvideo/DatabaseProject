@@ -17,25 +17,25 @@
     }
     ?>
 </head>
-<body>
+<body style="background: url('img/pattern.png');">
 <?php
 //TODO: Beautify this part
 $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM user WHERE id=$user_id;";
 $result = $db->query($query);
 $user = $result->fetch();
-printf("<h1><p align='center'>Profile</p></h1>");
+printf("<h2 align='center' style='color: dodgerblue'>Profile</h2>");
 printf("<table class='table'>");
-printf("<tr><td><h3>Name:</h3></td><td><h3>%s %s</h3></td></tr>", $user['fname'], $user['lname']);
+printf("<tr><td style='padding-left: 5px'><h3>Name:</h3></td><td><h3>%s %s</h3></td></tr>", $user['fname'], $user['lname']);
 printf("<tr><td><h3 >Username:</h3></td><td><h3>%s</h3></td></tr>", $user['username']);
 printf("<tr><td><h3>Email:</h3></td><td><h3>%s</h3></td><td><h3><a href='#'>Edit</a> </h3></td></tr>", $user['email']);
 printf("<tr><td><h3>Password:</h3></td><td><h3>**********</h3></td><td><h3><a href='#'>Change</a> </h3></td></tr>");
 printf("</table>");
 ?>
 
-<h2><p align="center">Course Reviews</p></h2>
-<table align="center" cellspacing="0" cellpadding="4" border="1">
-    <tr>
+<h2 align="center" style='color: dodgerblue'>Course Reviews</h2>
+<table align="center" cellspacing="0" cellpadding="4" border="1" >
+    <tr style='padding-left: 5px'>
         <th>Details</th>
         <th>Reviews</th>
         <th>Ratings</th>
@@ -67,7 +67,7 @@ printf("</table>");
     ?>
 </table>
 
-<h2><p align="center">Professor Reviews</p></h2>
+<h2><p align="center" style='color: dodgerblue'>Professor Reviews</p></h2>
 <table align="center" cellspacing="0" cellpadding="4" border="1">
     <tr>
         <th>Details</th>

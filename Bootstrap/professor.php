@@ -29,11 +29,11 @@ $professor = $result->fetch();
 
     <title><?php echo 'Rate my Professor | ' . $professor['name'] ?></title>
 </head>
-<body>
+<body style="background: url('img/pattern.png'); width:100%">
 
 <!-- sidebar -->
-<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-    <div class="jumbotron">
+<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation"style="background: url('img/pattern.png');">
+    <div class="jumbotron" >
         <h4><p align="left">Other Professors
                 from <?php
                 $query = "SELECT college.id AS col_id, college.name AS col_name, department.id AS dept_id, department.name AS dept_name" .
@@ -60,8 +60,8 @@ $professor = $result->fetch();
     </div>
 </div>
 <!-- main area -->
-<div class="col-xs-12 col-sm-9">
-    <div class="container">
+<div class="col-xs-12 col-sm-9" style="background: url('img/pattern.png');">
+    <div class="container" style="background: url('img/pattern.png');">
         <?php
         if (array_key_exists('review_added', $_SESSION)) {
             unset($_SESSION['review_added']);
