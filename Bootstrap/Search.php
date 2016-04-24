@@ -16,7 +16,7 @@
 
     <title>Search Result</title>
 </head>
-<body>
+<body style="background: url('img/pattern.png');">
 
 <?php
 $isDepartment = array_key_exists('Department', $_POST);
@@ -31,8 +31,8 @@ if ($isCourse) {
     $result = $db->query($query);
     $courseCount = $result->rowCount();
     if ($courseCount > 0) {
-        echo "<h2><p align='center'>Courses</p></h2>";
-        echo "<table id='search' class='table table-striped table-bordered' width='100%' cellspacing='0'>";
+        echo "<h2 align='center' style='color: dodgerblue;'>COURSES</h2>";
+        echo "<table id='search' class='table-striped table-bordered' align='center' width='80%' cellspacing='0'>";
     }
     foreach ($result as $row) {
         $courseID = $row['courseID'];
@@ -41,8 +41,8 @@ if ($isCourse) {
         $deptName = $row['deptName'];
         $collegeID = $row['collegeID'];
         $collegeName = $row['collegeName'];
-        printf("<tr><td><h3><p><a href='course.php?id=$courseID'>$courseName</a></p></h3><h4><p><a href='department.php?id=$deptID'>$deptName</a>" .
-            "</p><p><a href='college.php?id=$collegeID'>$collegeName</a> </p></h4></td><td><form class='navbar-form' method='POST' action='course-review.php'>" .
+        printf("<tr><td><b><h3><a href='course.php?id=$courseID'>$courseName</a></h3></b><h5><p><a href='department.php?id=$deptID'>$deptName</a>" .
+            "</p><p><a href='college.php?id=$collegeID'>$collegeName</a> </p></h5></td><td><form class='navbar-form' method='POST' action='course-review.php'>" .
             "<input type='hidden' name='course_id' value='$courseID'><button type='success'class='btn btn-primary btn-md'>Rate this Course</button></form></td></tr>");
     }
     if ($courseCount > 0) {
@@ -69,14 +69,14 @@ if ($isCourse) {
             if ($depts->rowCount() != 0) {
                 if (!$headerSet) {
                     $headerSet = true;
-                    echo "<h2><p align='center'>Departments</p></h2>";
-                    printf("<table class='table'>");
+                    echo "<h2 align='center'style='color: dodgerblue;'>DEPARTMENT</h2>";
+                    echo "<table class='table-striped table-bordered' align='center' width='80%'>";
                 }
                 foreach ($depts as $dep) {
                     $deptID = $dep['id'];
                     $deptName = $dep['name'];
                     $website = $dep['website'];
-                    printf("<tr><td><h3><p><a href='department.php?id=$deptID'>$deptName</a></p></h3>" .
+                    printf("<tr><td><b><h3><a href='department.php?id=$deptID'>$deptName</a></h3></b>" .
                         "<h4><p><a href='college.php?id=$colID'>$colName</a></p>" .
                         "<p>$collegeAddress</p></h4></td></tr>");
                 }
@@ -88,7 +88,6 @@ if ($isCourse) {
     } else {
         printf("</table>");
     }
-
 } else {
     $profCount = 0;
     if (!(array_key_exists('collegeOnly', $_POST))) {
@@ -97,8 +96,8 @@ if ($isCourse) {
         $result = $db->query($query);
         $profCount = $result->rowCount();
         if ($profCount != 0) {
-            printf("<h2><p align='center'>Professors</p></h2> <br>");
-            printf("<table  class='table'");
+            printf("<h2 align='center' style='color: dodgerblue;'>PROFESSORS</h2> <br>");
+            echo "<table  class='table-striped table-bordered' align='center' width='80%'>";
             foreach ($result as $row) {
                 $profName = $row['name'];
                 $profId = $row['id'];
@@ -107,7 +106,7 @@ if ($isCourse) {
                     " FROM department JOIN college ON department.id=$deptId AND college_id=college.id;";
                 $deptCol = $db->query($query);
                 $deptCol = $deptCol->fetch();
-                printf("<tr><td><h3><p><a href='professor.php?id=$profId'>$profName</a></p></h3>" .
+                printf("<tr><td><b><h3><a href='professor.php?id=$profId'>$profName</a></h3></b>" .
                     "<h4><p><a href='department.php?id=$deptId'>%s Department</a></p>" .
                     "<p><a href='college.php?id=%d'>%s</a></p></h4></td>" .
                     "<td><form class='navbar-form' method='POST' action='professor-review.php'><input type='hidden' name='professor_id' value='$profId'>" .
@@ -128,8 +127,8 @@ if ($isCourse) {
         $result = $db->query($query);
         $colCount = $result->rowCount();
         if ($colCount != 0) {
-            printf("<h2><p align='center'>Colleges</p></h2> <br>");
-            printf("<table  class='table'>");
+            printf("<h2 align='center'  style='color: dodgerblue;'>COLLEGES</h2> <br>");
+            echo "<table  class='table-striped table-bordered' align='center' width='80%'>";
             foreach ($result as $row) {
                 $colName = $row['name'];
                 $colId = $row['id'];
@@ -139,7 +138,7 @@ if ($isCourse) {
                 if (!(substr($website, 0, 4) == "http")) {
                     $website = "http://" . $website;
                 }
-                echo "<tr><td><h3><a href='college.php?id=$colId'>$colName</a></h3><h4><p>$city, $state</p> <p><a href='$website'>$website</a></p></h4></td></tr>";
+                echo "<tr><td><b><h3><a href='college.php?id=$colId'>$colName</a></h3></b><h4><p>$city, $state</p> <p><a href='$website'>$website</a></p></h4></td></tr>";
             }
             printf("</table>");
         }
@@ -150,13 +149,7 @@ if ($isCourse) {
 }
 
 ?>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#search').dataTable( {
-            "pagingType": "scrolling"
-        } );
-    } );
-</script>
+
 </body>
 
 </html>

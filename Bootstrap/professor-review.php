@@ -46,7 +46,13 @@
     ?>
     <link rel="stylesheet" href="css/star-rating.css">
     <script src="js/star-rating.js"></script>
-
+    <script>
+        function reset_star() {
+            $('#star1').rating('reset');
+            $('#star2').rating('reset');
+            $('#star3').rating('reset');
+        }
+    </script>
     <link rel="stylesheet" href="css/bootstrap-toggle.css">
     <script src="js/bootstrap-toggle.js"></script>
 
@@ -56,7 +62,7 @@
         ?>
     </title>
 
-<body>
+<body style="background: url('img/pattern.png');">
 <div class="container">
     <?php
     printf("<h3 style='text-align: center'>Add a review for<br> <a href='professor.php?id=$id'>$professorName</a><br>" .
@@ -64,7 +70,7 @@
     ?>
 </div>
 
-<div class="jumbotron">
+<div class="jumbotron" style="text-align: left">
     <form class="form-horizontal" role="form" method="POST" action="add-professor-review.php">
         <?php
         if ($addFailed) {
@@ -72,8 +78,12 @@
         }
         ?>
         <input type="hidden" name="profID" value="<?php echo $id; ?>">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">Course not on the list? <a href="add-course.php?deptID=<?php echo $deptID; ?>">Click here to add.</a></div>
+        </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="email">Course:</label>
+            <label class="control-label col-sm-2" for="email" >Course:</label>
             <div class="col-sm-4">
                 <select class="form-control" name="courseID" required>
                     <?php
@@ -89,14 +99,11 @@
                     ?>
                 </select>
             </div>
-            <label class="control-label">Course not on the list? <a href="add-course.php?deptID=<?php echo $deptID; ?>">Click
-                    here to
-                    add.</a></label>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Easiness:</label>
             <div class="col-sm-4">
-                <input type="number" name="easiness" class="rating" min=0 max=5 step=1 data-size="sm" data-rtl="false"
+                <input type="number" id='star1' name="easiness" class="rating" min=0 max=5 step=0.5 data-size="sm" data-rtl="false"
                     <?php if ($addFailed) {
                         echo "value=" . $easiness;
                     } ?> required>
@@ -105,7 +112,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Helpfulness:</label>
             <div class="col-sm-4">
-                <input type="number" name="helpfulness" class="rating" min=0 max=5 step=1 data-size="sm"
+                <input type="number" id="star2" name="helpfulness" class="rating rating-loading" min=0 max=5 step=0.5 data-size="sm"
                        data-rtl="false"
                     <?php if ($addFailed) {
                         echo "value=" . $helpfulness;
@@ -115,7 +122,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Clarity:</label>
             <div class="col-sm-4">
-                <input type="number" name="clarity" class="rating" min=0 max=5 step=1 data-size="sm" data-rtl="false"
+                <input type="number" id='star3' name="clarity" class="rating" min=0 max=5 step=0.5 data-size="sm" data-rtl="false"
                     <?php if ($addFailed) {
                         echo "value=" . $clarity;
                     } ?> required>
@@ -133,7 +140,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Overall rating:</label>
             <div class="col-sm-4">
-                <input type="number" name="overall_rating" class="rating" min=0 max=5 step=1 data-size="sm"
+                <input type="number" id='last' name="overall_rating" class="rating" min=0 max=5 step=0.5 data-size="sm"
                        data-rtl="false"
                     <?php if ($addFailed) {
                         echo "value=" . $overallRating;
@@ -141,9 +148,9 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-4" align="center">
-                <input class="btn btn-default" type="submit" value="Submit">
-                <input class="btn btn-danger" type="reset" value="Reset">
+            <div class="col-sm-4" align="right">
+                <input class="btn btn-success" type="submit" value="Submit">
+                <input class="btn btn-default" id='reset' type="reset"  onclick="reset_star()" value="Reset">
             </div>
 
         </div>

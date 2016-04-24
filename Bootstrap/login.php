@@ -29,7 +29,7 @@
     ?>
 </head>
 
-<body>
+<body style="background: url('img/pattern.png');">
 
 <div class="container">
 

@@ -33,21 +33,15 @@
             <li><a data-toggle="tab" href="#dept">Search Department</a></li>
             <li><a data-toggle="tab" href="#course">Search Course</a></li>
         </ul>
-        <div class="tab-content" align='center'>
+        <div class="tab-content" align='center' style="text-align: center">
             <div id="prof" class="tab-pane fade in active" >
                 <form class="navbar-form" action="Search.php" method="POST">
                     <div class="form-group" style="padding-top: 30px">
                         <div class="input-group input-group-lg">
                             <input type="hidden" name="professorOnly" value="true">
-                            <table class="table">
-                                <tr>
-                                    <td><input type="text" name="query" class="form-control" style="height: 60px; width: 100%; border-radius:25px; font-size: x-large" placeholder="Professor's Name"></td> 
-                                </tr>
-                                <tr>
-                                    <td align="center"><button type="submit" class="btn btn-default">Search</button></td>
-                                </tr>
-                            
-                            </table>
+                            <input type="text" name="query" class="form-control" style="height: 60px; width: 100%; border-radius:25px; font-size: x-large" placeholder="Professor's Name"></td>
+                            <hr style="height:30pt; visibility:hidden;" />
+                            <button type="submit" class="btn btn-default" >Search</button>
                         </div>
                     </div>
                     
@@ -122,25 +116,14 @@
                     <input type="submit" class="btn btn-default" value="Search">
                 </form>
             </div>
-            <div id="dept" class="tab-pane fade" align='center'>
+            <div id="dept" class="tab-pane fade" align='center' style="text-align: center">
                 <form class="navbar-form" action="Search.php" method="POST">
                     <div class="form-group" style="padding-top: 30px">
                         <div class="input-group input-group-lg">
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    <td width="50%">
-                                        <input type="text" name="College" class="form-control" style="height: 50px; width: 100%; border-radius:25px; font-size: larger" placeholder="College">
-                                    </td>
-                                    <td width="50%">
-                                        <input type="text" name="Department" class="form-control" style="height: 50px; width: 100%; border-radius:25px; font-size: larger" placeholder="Department">
-                                    </td>
-                                </tr> 
-                                <tr>
-                                   <td colspan="2" align="center"><button type="submit" class="btn btn-default">Search</button></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <input type="text" name="College" class="form-control" style="height: 50px; width: 100%; border-radius:25px; font-size: larger" placeholder="College">
+                            <input type="text" name="Department" class="form-control" style="height: 50px; width: 100%; border-radius:25px; font-size: larger" placeholder="Department">
+                            <hr style="height:60pt; visibility:hidden;"/>
+                            <button type="submit" class="btn btn-default">Search</button>
                         </div>
                     </div>
                 </form>
@@ -149,19 +132,10 @@
                 <form class="navbar-form" action="Search.php" method="POST">
                     <div class="form-group" style="padding-top: 30px">
                         <div class="input-group input-group-lg">
-                            <table class="table">
-                                <tr>
-                                    <td width="50%">
-                                        <input type="text" name="College" class="form-control" style="height: 50px; width: 100%; border-radius:25px; font-size: larger" placeholder="College">
-                                    </td>
-                                    <td width="50%">
-                                        <input type="text" name="Course" class="form-control" style="height: 50px; width: 100%; border-radius:25px; font-size: larger" placeholder="Course">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" align="center"><button type="submit" class="btn btn-default">Search</button></td>
-                                </tr>
-                            </table>
+                            <input type="text" name="College" class="form-control" style="height: 50px; width: 100%; border-radius:25px; font-size: larger" placeholder="College">
+                            <input type="text" name="Course" class="form-control" style="height: 50px; width: 100%; border-radius:25px; font-size: larger" placeholder="Course">
+                            <hr style="height:60pt; visibility:hidden;"/>
+                            <button type="submit" class="btn btn-default">Search</button>
                         </div>
                     </div>
                 </form>

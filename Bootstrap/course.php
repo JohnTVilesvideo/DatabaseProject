@@ -23,11 +23,10 @@ $course = $result->fetch();
 <head>
     <title><?php echo 'Rate my Professor | ' . $course['name'] ?></title>
 </head>
-<body>
+<body style="background: url('img/pattern.png');">
 
 <!-- sidebar -->
-<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-    <div class="jumbotron">
+<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation" style="background: lightgray;">
         <h4><p align="left">Other Courses
                 from <?php
                 $query = "SELECT college.id AS col_id, college.name AS col_name, department.id AS dept_id, department.name AS dept_name" .
@@ -51,7 +50,6 @@ $course = $result->fetch();
             }
             ?>
         </table>
-    </div>
 </div>
 <!-- main area -->
 <div class="col-xs-12 col-sm-9">

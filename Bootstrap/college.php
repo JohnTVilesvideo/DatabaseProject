@@ -26,11 +26,8 @@
 
     <title><?php echo 'Rate my Professor | ' . $college['name'] ?></title>
 </head>
-<body>
-</div><!-- sidebar -->
-<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-
-    <div class="jumbotron">
+<body style="background: url('img/pattern.png');">
+<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation" style="background: lightgray;">
         <h4><p align="left">Other Colleges from <?php echo $college['state'] ?></p>
         </h4>
         <table class="table">
@@ -47,14 +44,13 @@
             }
             ?>
         </table>
-    </div>
 </div>
 
 <!-- main area -->
-<div class="col-xs-12 col-sm-9">
+<div class="col-xs-12 col-sm-9" >
     <div class="container">
         <?php
-        printf("<table align='center' cellspacing='0' cellpadding='4'>");
+        printf("<table align='center' cellspacing='0' cellpadding='4' style='color: dodgerblue'>");
         printf("<tr><td><h2>%s</h2></td></tr>", $college['name']);
         printf("<tr><td><h3>%s, %s</h3></td></tr>", $college['city'], $college['state']);
         $website = $college['website'];
@@ -80,5 +76,6 @@
             ?>
         </table>
     </div>
+</div>
 </body>
 </html>

@@ -49,6 +49,13 @@
     ?>
     <link rel="stylesheet" href="css/star-rating.css">
     <script src="js/star-rating.js"></script>
+    <script>
+        function reset_star() {
+            $('#star1').rating('reset');
+            $('#star2').rating('reset');
+            $('#textbook').bootstrapToggle('off');
+        }
+    </script>
 
     <link rel="stylesheet" href="css/bootstrap-toggle.css">
     <script src="js/bootstrap-toggle.js"></script>
@@ -59,7 +66,7 @@
         ?>
     </title>
 
-<body>
+<body style="background: url('img/pattern.png');">
 <div class="container">
     <?php
     printf("<h3 style='text-align: center'>Add a review for<br> <a href='course.php?id=$id'>$courseName</a><br>" .
@@ -75,6 +82,10 @@
         }
         ?>
         <input type="hidden" name="courseID" value="<?php echo $id; ?>">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-10">Professor not on the list? <a href="add-professor.php?deptID=<?php echo $deptID; ?>">Click here to add.</a></div>
+        </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Professor:</label>
             <div class="col-sm-4">
@@ -92,14 +103,11 @@
                     ?>
                 </select>
             </div>
-            <label class="control-label">Professor not on the list? <a
-                    href="add-professor.php?deptID=<?php echo $deptID; ?>">Click here to
-                    add.</a></label>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Easiness:</label>
             <div class="col-sm-4">
-                <input type="number" name="easiness" class="rating" min=0 max=5 step=1 data-size="sm" data-rtl="false"
+                <input type="number" id='star1' name="easiness" class="rating" min=0 max=5 step=0.5 data-size="sm" data-rtl="false"
                     <?php if ($addFailed) {
                         echo "value=" . $easiness;
                     } ?> required>
@@ -108,7 +116,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Textbook required:</label>
             <div class="col-sm-4">
-                <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No"
+                <input type="checkbox" id='textbook' data-toggle="toggle" data-on="Yes" data-off="No"
                        name="textbook_required" <?php if (!$addFailed || $textbookRequired == 'on') {
                     echo 'checked';
                 } else {
@@ -148,7 +156,7 @@
         <div class="form-group">
             <label class="control-label col-sm-2">Overall Rating:</label>
             <div class="col-sm-4">
-                <input type="number" name="overall_rating" class="rating" min=0 max=5 step=1 data-size="sm"
+                <input type="number" id='star2' name="overall_rating" class="rating" min=0 max=5 step=0.5 data-size="sm"
                        data-rtl="false" <?php if ($addFailed) {
                     echo "value=" . $overallRating;
                 } ?> required>
@@ -156,9 +164,9 @@
         </div>
 
         <div class="form-group">
-            <div class="col-sm-4" align="center">
-                <input class="btn btn-default" type="submit" value="Submit">
-                <input class="btn btn-danger" type="reset" value="Reset">
+            <div class="col-sm-4" align="right">
+                <input class="btn btn-success" type="submit" value="Submit">
+                <input class="btn btn-default" type="reset" onclick="reset_star()" value="Reset">
             </div>
 
         </div>
