@@ -61,6 +61,10 @@ $course = $result->fetch();
             unset($_SESSION['review_added']);
             printf("<div class='alert alert-success'> <strong>Review Added successfully!</strong> Thank you.<br></div>");
         }
+        if (array_key_exists('reported', $_SESSION)) {
+            unset($_SESSION['reported']);
+            printf("<div class='alert alert-success'> <strong>Review successfully reported !</strong>Our moderators will take appropriate action. Thank you.<br></div>");
+        }
         printf("<table align='center'>");
         printf("<tr><td><h2>%s (%s)</h2></td></tr>", $course['name'], $course['code']);
         $query = "SELECT college.id AS col_id, college.name AS col_name, department.id AS dept_id, department.name AS dept_name" .
@@ -87,6 +91,8 @@ $course = $result->fetch();
         $result = $db->query($query);
         foreach ($result as $row) {
             $prof_id = $row['prof_id'];
+            $user_id = $row['user_id'];
+            $course_id = $row['course_id'];
             $query = "SELECT name FROM professor WHERE id=$prof_id;";
             $prof = $db->query($query)->fetch();
             $book_required = "";
@@ -101,7 +107,13 @@ $course = $result->fetch();
             printf("<td><p><b>Instructor:</b> <a href='professor.php?id=%s'>%s</a></p><p><b>Textbook Required:</b> %s</p></td>",
                 $prof_id, $prof['name'], $book_required);
             printf("<td><p><b>Review:</b> %s</p> <p><b>Usefulness:</b> %s</p> <p><b>Tips:</b> %s</p></td>", $row['review'], $row['usefulness'], $row['tips']);
-            printf("<td><p><b>Easiness:</b> %s</p> <p><b>Overall Rating:</b> %s</p>", $row['easiness'], $row['overall_rating']);
+            printf("<td><p><b>Easiness:</b> %s</p> <p><b>Overall Rating:</b> %s</p><p><form method='post' action='report-review.php'>" .
+                "<span class='glyphicon glyphicon-exclamation-sign'></span>" .
+                "<input type='hidden' name='review_type' value='1'>" .
+                "<input type='hidden' name='user_id' value='$user_id'>" .
+                "<input type='hidden' name='course_id' value='$course_id'>" .
+                "<input type='hidden' name='prof_id' value='$prof_id'>" .
+                "<input type='submit' class='btn btn-link' value='report'></form></p></td>", $row['easiness'], $row['overall_rating']);
             printf("</tr>");
         }
         ?>

@@ -34,7 +34,7 @@
         printf("<h2 align='center'>There are no reported reviews.</h2>");
     } else {
         printf("<table class='table'>");
-        printf("<tr><th>Review Type</th><th>Review</th><th>Number of reports</th><th>Actions</th></tr>");
+        printf("<tr><th style='width:10%%;'>Review Type</th><th style='width:50%%;'>Review</th><th style='width:10%%;'>Number of reports</th><th style='width:20%%;'>Actions</th></tr>");
         foreach ($result as $row) {
             $reviewer = $row['user_id'];
             $professor = $row['prof_id'];

@@ -67,6 +67,10 @@ $professor = $result->fetch();
             unset($_SESSION['review_added']);
             printf("<div class='alert alert-success'> <strong>Review Added successfully!</strong> Thank you.<br></div>");
         }
+        if (array_key_exists('reported', $_SESSION)) {
+            unset($_SESSION['reported']);
+            printf("<div class='alert alert-success'> <strong>Review successfully reported !</strong>Our moderators will take appropriate action. Thank you.<br></div>");
+        }
         printf("<table align='center' cellspacing='0' cellpadding='4'>");
         printf("<tr><td><h2>%s</h2></td></tr>", $professor['name']);
 
@@ -89,12 +93,20 @@ $professor = $result->fetch();
         $result = $db->query($query);
         foreach ($result as $row) {
             $course_id = $row['course_id'];
+            $user_id = $row['user_id'];
+            $prof_id = $row['prof_id'];
             $query = "SELECT name FROM course WHERE id=$course_id;";
             $course = $db->query($query)->fetch();
             printf("<tr>");
             printf("<td><a href='course.php?id=%s'>%s</a></td>", $course_id, $course['name']);
             printf("<td>%s</td>", $row['review']);
-            printf("<td><p><b>Helpfulness:</b> %s</p><p><b>Easiness:</b> %s</p><p><b>Clarity:</b> %s</p> <p><b>Overall Rating:</b> %s</p>",
+            printf("<td><p><b>Helpfulness:</b> %s</p><p><b>Easiness:</b> %s</p><p><b>Clarity:</b> %s</p> <p><b>Overall Rating:</b> %s</p><p><form method='post' action='report-review.php'>" .
+                "<span class='glyphicon glyphicon-exclamation-sign'></span>" .
+                "<input type='hidden' name='review_type' value='0'>" .
+                "<input type='hidden' name='user_id' value='$user_id'>" .
+                "<input type='hidden' name='course_id' value='$course_id'>" .
+                "<input type='hidden' name='prof_id' value='$prof_id'>" .
+                "<input type='submit' class='btn btn-link' value='report'></form></p></td>",
                 $row['helpfulness'], $row['easiness'], $row['clarity'], $row['overall_rating']);
             printf("</tr>");
         }
