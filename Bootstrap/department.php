@@ -26,8 +26,7 @@
 </head>
 <body style="background: url('img/pattern.png');">
 <!-- sidebar -->
-<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-    <div class="jumbotron">
+<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation" style="background: lightgray;">
         <h4><p align="left">Other departments
                 from <?php
                 $query = "SELECT * FROM college WHERE id=" . $department['college_id'] . ';';
@@ -50,7 +49,6 @@
             }
             ?>
         </table>
-    </div>
 </div>
 <!-- main area -->
 <div class="col-xs-12 col-sm-9">

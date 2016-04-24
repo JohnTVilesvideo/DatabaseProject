@@ -27,9 +27,7 @@
     <title><?php echo 'Rate my Professor | ' . $college['name'] ?></title>
 </head>
 <body style="background: url('img/pattern.png');">
-<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
-
-    <div class="jumbotron">
+<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation" style="background: lightgray;">
         <h4><p align="left">Other Colleges from <?php echo $college['state'] ?></p>
         </h4>
         <table class="table">
@@ -46,7 +44,6 @@
             }
             ?>
         </table>
-    </div>
 </div>
 
 <!-- main area -->

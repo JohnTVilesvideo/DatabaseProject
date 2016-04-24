@@ -32,8 +32,8 @@ $professor = $result->fetch();
 <body style="background: url('img/pattern.png'); width:100%">
 
 <!-- sidebar -->
-<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation"style="background: url('img/pattern.png');">
-    <div class="jumbotron" >
+<div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation"style="background: lightgray;">
+    
         <h4><p align="left">Other Professors
                 from <?php
                 $query = "SELECT college.id AS col_id, college.name AS col_name, department.id AS dept_id, department.name AS dept_name" .
@@ -57,7 +57,7 @@ $professor = $result->fetch();
             }
             ?>
         </table>
-    </div>
+    
 </div>
 <!-- main area -->
 <div class="col-xs-12 col-sm-9" style="background: url('img/pattern.png');">
