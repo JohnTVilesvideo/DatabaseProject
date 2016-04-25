@@ -31,4 +31,5 @@ if (!$keepPassword) {
 $query = $query . "fname='$fname', lname='$lname', email='$email' WHERE id=$id;";
 $db->query($query);
 $_SESSION['edit-success'] = true;
+$_SESSION['users_name'] = $_POST['fname'] . " " . $_POST['lname'];
 header("Location:profile.php");

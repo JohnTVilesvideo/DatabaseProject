@@ -17,7 +17,7 @@
     }
     ?>
 </head>
-<body>
++<body style="background: url('img/pattern.png');">
 <?php
 $user_id = $_SESSION['user_id'];
 $query = "SELECT * FROM user WHERE id=$user_id;";
