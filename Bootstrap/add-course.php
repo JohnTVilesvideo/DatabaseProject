@@ -63,6 +63,8 @@
         <div class="form-group">
             <label class="control-label col-sm-2">College:</label>
             <div class="col-sm-4">
+                <input type="hidden" name="location" value="<?php echo $_GET['location']?>">
+                <input type="hidden" name="append" value="<?php echo $_GET['id']?>">
                 <input type="text" class="form-control" name="collegeName"
                     <?php if ($deptGiven) {
                         echo "value='$collegeName' disabled";

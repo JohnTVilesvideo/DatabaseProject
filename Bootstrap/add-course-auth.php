@@ -8,6 +8,8 @@ include_once('db_connect.php');
 session_start();
 $courseName = $_POST['courseName'];
 $courseCode = $_POST['courseCode'];
+$redirect = $_POST['location'] . '?id=' . $_POST['append'];
+
 if (array_key_exists('dept_id', $_POST)) {
     $deptID = $_POST['dept_id'];
     $result = $db->query("SELECT * FROM course WHERE dept_id=$deptID AND name='$courseName';");
@@ -47,7 +49,7 @@ if (array_key_exists('dept_id', $_POST)) {
 
 if (!array_key_exists('add-failed', $_SESSION)) {
     $db->query("INSERT INTO course VALUES(DEFAULT, $deptID, '$courseCode', '$courseName');");
-    header("Location:index.php"); //TODO: redirect to review page if user came to add-course from add review page
+    header("Location:$redirect");
 } else {
     $_SESSION['collegeName'] = $_POST['collegeName'];
     $_SESSION['deptName'] = $_POST['deptName'];

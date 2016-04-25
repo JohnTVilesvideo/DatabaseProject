@@ -7,6 +7,7 @@
 include_once('db_connect.php');
 session_start();
 $professorName = $_POST['professorName'];
+$redirect = $_POST['location'] . '?id=' . $_POST['append'];
 if (array_key_exists('dept_id', $_POST)) {
     $deptID = $_POST['dept_id'];
     $result = $db->query("SELECT * FROM professor WHERE dept_id=$deptID AND name='$professorName';");
@@ -44,7 +45,7 @@ if (array_key_exists('dept_id', $_POST)) {
 
 if (!array_key_exists('add-failed', $_SESSION)) {
     $db->query("INSERT INTO professor VALUES(DEFAULT, '$professorName', $deptID);");
-    header("Location:index.php"); //TODO: redirect to review page if user came to add-professor from add review page
+    header("Location:$redirect"); 
 } else {
     $_SESSION['collegeName'] = $_POST['collegeName'];
     $_SESSION['deptName'] = $_POST['deptName'];

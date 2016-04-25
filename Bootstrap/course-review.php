@@ -84,7 +84,7 @@
         <input type="hidden" name="courseID" value="<?php echo $id; ?>">
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-10">Professor not on the list? <a href="add-professor.php?deptID=<?php echo $deptID; ?>">Click here to add.</a></div>
+            <div class="col-md-10">Professor not on the list? <a href="add-professor.php?deptID=<?php echo $deptID; ?>&location=<?php echo $_SERVER['REQUEST_URI']?>&id=<?php echo $id?>">Click here to add.</a></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2">Professor:</label>

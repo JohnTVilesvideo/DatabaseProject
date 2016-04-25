@@ -80,7 +80,7 @@
         <input type="hidden" name="profID" value="<?php echo $id; ?>">
         <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-10">Course not on the list? <a href="add-course.php?deptID=<?php echo $deptID; ?>">Click here to add.</a></div>
+            <div class="col-md-10">Course not on the list? <a href="add-course.php?deptID=<?php echo $deptID; ?>&location=<?php echo $_SERVER['REQUEST_URI']?>&id=<?php echo $id?>">Click here to add.</a></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-2" for="email" >Course:</label>
