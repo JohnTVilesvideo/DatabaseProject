@@ -22,7 +22,7 @@
 <div class="jumbotron" style="background: url('img/background2.jpg')">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8"><b><h1 style="text-align: center; color: dodgerblue; text-shadow: 4px 4px 6px #cbb;">Read Reviews and Tell Your Experiences</h1></b></div>
+        <div class="col-md-8"><b><h1 style="text-align: center; color: dodgerblue; text-shadow: 4px 4px 6px #cbb;">Read Reviews and Share Your Experiences</h1></b></div>
         <div class="col-md-2"></div>
     </div>
     <div class="container" style="padding-top: 20px">
@@ -147,11 +147,11 @@
 <div class="jumbotron" style="background: url('img/background3.jpg')">
     <h1 align="center" style="font-family: SansSerif; color: dodgerblue">How it works</h1>
     <h2 align="center" style="font-family: SansSerif; color: dodgerblue">Read Reviews</h2>
-    <div class="jumbotron" style="background: url('img/instruct.gif') no-repeat ; background-size: 100% 600px;">
+    <div class="jumbotron" align='center' style="background: url('img/instruct.gif') no-repeat center center; background-size: 80% 600px;">
         <div style="height: 600px"></div>
     </div>
     <h2 align="center" style="font-family: SansSerif; color: dodgerblue">Rate professor/course</h2>
-    <div class="jumbotron" style="background: url('img/write.gif') no-repeat ; background-size: 100% 700px;">
+    <div class="jumbotron" style="background: url('img/write.gif') no-repeat center center; background-size: 80% 700px;">
         <div style="height: 700px"></div>
     </div>
 
