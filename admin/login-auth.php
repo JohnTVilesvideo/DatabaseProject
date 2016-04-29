@@ -3,9 +3,9 @@
 include_once('../db_connect.php');
 
 $username = $_POST['username'];
-$password = $_POST['password'];
-$query = "SELECT * FROM user WHERE username='$username' AND password=MD5('$password');";
-$result = $db->query($query);
+$password = md5($_POST['password']);
+$result = $db->prepare("SELECT * FROM user WHERE username=? AND password=?;");
+$result->execute(array($username, $password));
 session_start();
 
 if ($result->rowCount() != 0) {

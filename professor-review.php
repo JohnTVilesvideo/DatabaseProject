@@ -16,8 +16,8 @@
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
     }
-    $query = "SELECT professor.name AS professorName, professor.dept_id AS deptID, department.name AS deptName, college.name AS collegeName, college.id AS collegeID FROM (professor JOIN department ON professor.dept_id=department.id) JOIN college ON department.college_id=college.id WHERE professor.id=$id;";
-    $result = $db->query($query);
+    $result = $db->prepare("SELECT professor.name AS professorName, professor.dept_id AS deptID, department.name AS deptName, college.name AS collegeName, college.id AS collegeID FROM (professor JOIN department ON professor.dept_id=department.id) JOIN college ON department.college_id=college.id WHERE professor.id=?;");
+    $result->execute(array($id));
     $result = $result->fetch();
     $professorName = $result['professorName'];
     $deptID = $result['deptID'];
@@ -87,8 +87,8 @@
             <div class="col-sm-4">
                 <select class="form-control" name="courseID" required>
                     <?php
-                    $query = "SELECT * FROM course WHERE dept_id=$deptID;";
-                    $result = $db->query($query);
+                    $result = $db->prepare("SELECT * FROM course WHERE dept_id=?;");
+                    $result->execute(array($deptID));
                     foreach ($result as $row) {
                         if ($addFailed && $row['id'] == $courseID) {
                             printf("<option value='%d' selected>%s</option>", $row['id'], $row['name']);

@@ -25,14 +25,14 @@ if ($password != $confirm_password) {
     $_SESSION['password_mismatch'] = true;
 }
 
-$query = "Select * FROM user WHERE username='$username';";
-$result = $db->query($query);
+$result = $db->prepare("Select * FROM user WHERE username=?;");
+$result->execute(array($username));
 if ($result->rowCount() > 0) {
     $_SESSION['signup_failed'] = true;
     $_SESSION['invalid_username'] = true;
 }
-$query = "Select * FROM user WHERE email='$email';";
-$result = $db->query($query);
+$result = $db->prepare("Select * FROM user WHERE email=?;");
+$result->execute(array($email));
 if ($result->rowCount() > 0) {
     $_SESSION['signup_failed'] = true;
     $_SESSION['invalid_email'] = true;
@@ -45,11 +45,11 @@ if (array_key_exists('signup_failed', $_SESSION)) {
     unset($_SESSION['invalid_username']);
     unset($_SESSION['invalid_email']);
     $password = md5($password);
-    $query = "INSERT INTO user VALUES(DEFAULT, '$username', '$password', '$fname', '$lname', '$email', 'USER');";
-    $result = $db->query($query);
+    $result = $db->prepare("INSERT INTO user VALUES(DEFAULT, ?, ?, ?, ?, ?, 'USER');");
+    $result->execute(array($username, $password, $fname, $lname, $email));
     if ($result) {
-        $query = "SELECT * FROM user WHERE username='$username' AND password='$password';";
-        $result = $db->query($query);
+        $result = $db->prepare("SELECT * FROM user WHERE username=? AND password=?;");
+        $result->execute(array($username, $password));
         $user = $result->fetch();
         $_SESSION['username'] = $username;
         $_SESSION['user_id'] = $user['id'];

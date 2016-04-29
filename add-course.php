@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Add a Professor | Rate my Professor</title>
+    <title>Add a Course | Rate my Course</title>
     <?php
 
     include_once('db_connect.php');
@@ -18,9 +18,8 @@
     $deptGiven = array_key_exists('deptID', $_GET);
     if ($deptGiven) {
         $deptID = $_GET['deptID'];
-        $query = "SELECT department.name AS deptName, college.id AS collegeID, college.name AS collegeName " .
-            "FROM department JOIN college ON department.college_id=college.id WHERE department.id=$deptID;";
-        $result = $db->query($query);
+        $result = $db->prepare("SELECT department.name AS deptName, college.id AS collegeID, college.name AS collegeName FROM department JOIN college ON department.college_id=college.id WHERE department.id=?;");
+        $result->execute(array($deptID));
         $result = $result->fetch();
         $deptName = $result['deptName'];
         $collegeID = $result['collegeID'];
@@ -39,16 +38,18 @@
             $deptName = $_SESSION['deptName'];
         }
         unset($_SESSION['deptName']);
-        $professorName = $_SESSION['professorName'];
-        unset($_SESSION['professorName']);
+        $courseName = $_SESSION['courseName'];
+        unset($_SESSION['courseName']);
+        $courseCode = $_SESSION['courseCode'];
+        unset($_SESSION['courseCode']);
     }
     ?>
 </head>
 
 <body style="background: url('img/pattern.png');">
 <div class="jumbotron">
-    <h3 align="center">Add new Professor</h3>
-    <form class="form-horizontal" role="form" method="POST" action="add-professor-auth.php">
+    <h3 align="center">Add new Course</h3>
+    <form class="form-horizontal" role="form" method="POST" action="add-course-auth.php">
         <?php
         if ($addFailed) {
             printf($_SESSION['error-message']);
@@ -76,8 +77,7 @@
             <label class="control-label col-sm-2">Department:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="deptName"
-                    <?php
-                    if ($deptGiven) {
+                    <?php if ($deptGiven) {
                         echo "value='$deptName' disabled";
                     } else if ($addFailed) {
                         echo "value='$deptName'";
@@ -86,12 +86,20 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2">Professor's Name:</label>
+            <label class="control-label col-sm-2">Course Name:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control"
-                       name="professorName" <?php if ($addFailed) echo "value='$professorName''"; ?> required>
+                       name="courseName" <?php if ($addFailed) echo "value='$courseName''"; ?> required>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Course Code:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control"
+                       name="courseCode" <?php if ($addFailed) echo "value='$courseCode''"; ?> required>
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-sm-4" align="center">
                 <input class="btn btn-default" type="submit" value="Submit">
@@ -101,8 +109,6 @@
         </div>
     </form>
     <div class="container">
-
-
     </div> <!-- /container -->
 
 </body>

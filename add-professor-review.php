@@ -9,9 +9,8 @@ session_start();
 $userID = $_SESSION['user_id'];
 $courseID = $_POST['courseID'];
 $profID = $_POST['profID'];
-$query = "SELECT * FROM prof_review WHERE user_id=$userID AND course_id=$courseID AND prof_id=$profID;";
-echo $query;
-$result = $db->query($query);
+$result = $db->prepare("SELECT * FROM prof_review WHERE user_id=? AND course_id=? AND prof_id=?;");
+$result->execute(array($userID, $courseID, $profID));
 if ($result->rowCount() > 0) {
     $_SESSION['add-failed'] = true;
     $_SESSION['professorID'] = $_POST['profID'];
@@ -28,9 +27,8 @@ if ($result->rowCount() > 0) {
     $clarity = $_POST['clarity'];
     $review = $_POST['professor_review'];
     $overallRating = $_POST['overall_rating'];
-    $query = "INSERT INTO prof_review VALUES($userID, $profID, $courseID, '$review', $helpfulness, $easiness, $clarity, $overallRating);";
-//    echo $query;
-    $db->query($query);
+    $query = $db->prepare("INSERT INTO prof_review VALUES(?, ? , ?, ?, ?, ?, ?, ?);");
+    $query->execute(array($userID, $profID, $courseID, $review, $helpfulness, $easiness, $clarity, $overallRating));
     $_SESSION['review_added'] = true;
     header("Location:professor.php?id=$profID");
 }

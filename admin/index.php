@@ -21,8 +21,8 @@
         header("Location:login.php");
     }
     $userID = $_SESSION['user_id'];
-    $query = "SELECT usergroup FROM user WHERE id = $userID;";
-    $result = $db->query($query);
+    $result = $db->prepare("SELECT usergroup FROM user WHERE id = ?;");
+    $result->execute(array($userID));
     $user = $result->fetch();
     if ($user['usergroup'] != 'MOD') {
         header("Location:login.php");
@@ -41,11 +41,13 @@
             $course = $row['course_id'];
             $type = $row['type'];
             if ($type == 0) {
-                $data = $db->query("SELECT * FROM prof_review WHERE  user_id=$reviewer AND prof_id=$professor AND  course_id=$course;");
+                $data = $db->prepare("SELECT * FROM prof_review WHERE  user_id=? AND prof_id=? AND  course_id=?;");
+                $data->execute(array($reviewer, $professor, $course));
                 $data = $data->fetch();
 
             } else {
-                $data = $db->query("SELECT * FROM course_review WHERE  user_id=$reviewer AND prof_id=$professor AND  course_id=$course;");
+                $data = $db->prepare("SELECT * FROM course_review WHERE  user_id=? AND prof_id=? AND  course_id=?;");
+                $data->execute(array($reviewer, $professor, $course));
                 $data = $data->fetch();
             }
             printf("<tr>");

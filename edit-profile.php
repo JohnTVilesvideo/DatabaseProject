@@ -23,13 +23,19 @@ if ($password != $confirm_password) {
     header("Location:profile.php");
 }
 $keepPassword = $password == '';
-$query = "UPDATE user SET username='$username', ";
+$query = "UPDATE user SET username=?, ";
 if (!$keepPassword) {
     $password = md5($password);
-    $query = $query . "password='$password', ";
+    $query = $query . "password=?, ";
 }
-$query = $query . "fname='$fname', lname='$lname', email='$email' WHERE id=$id;";
-$db->query($query);
+$query = $query . "fname=?, lname=?, email=? WHERE id=?;";
+$query = $db->prepare($query);
+if (!$keepPassword) {
+    $query->execute(array($username, $password, $fname, $lname, $email, $id));
+}
+else{
+    $query->execute(array($username, $fname, $lname, $email, $id));
+}
 $_SESSION['edit-success'] = true;
 $_SESSION['users_name'] = $_POST['fname'] . " " . $_POST['lname'];
 header("Location:profile.php");
