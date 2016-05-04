@@ -31,44 +31,44 @@ if (array_key_exists('edit', $_POST) || $editFailed) {
         printf($_SESSION['error-message']);
         unset($_SESSION['error-message']);
     }
-    printf("<h1><p align='center'>Profile</p></h1>");
-    printf("<form class='form' method='post' action='edit-profile.php'>");
-    printf("<table class='table'>");
-    printf("<tr><td><h3>First Name:</h3></td><td><h3><input type='text' placeholder='First name' name='fname' value='%s' required></h3></td></tr>", $user['fname']);
-    printf("<tr><td><h3>Last Name:</h3></td><td><h3><input type='text' placeholder='Last name' name='lname' value='%s' required></h3></td></tr>", $user['lname']);
-    printf("<tr><td><h3>Username:</h3></td><td><h3><input type='text' placeholder='Username' name='username' value='%s' required></h3></td></tr>", $user['username']);
-    printf("<tr><td><h3>Email:</h3></td><td><h3><input type='email' placeholder='Email' name='email' value='%s' required></h3></td></tr>", $user['email']);
-    printf("<tr><td><h3>Password:</h3></td><td><h3><input type='password' name='password' placeholder='Leave blank if unchanged'></h3></td></tr>");
-    printf("<tr><td><h3>Password:</h3></td><td><h3><input type='password' name='confirm_password' placeholder='Leave blank if unchanged'></h3></td></tr>");
-    printf("<tr><td></td><td>");
-    printf("<div class='btn-group'>");
+    printf("<h1><p align='center'>Profile</p></h1>\n");
+    printf("<form class='form' method='post' action='edit-profile.php'>\n");
+    printf("<table class='table'>\n");
+    printf("<tr><td><h3>First Name:</h3></td><td><h3><input type='text' placeholder='First name' name='fname' value='%s' required></h3></td></tr>\n", $user['fname']);
+    printf("<tr><td><h3>Last Name:</h3></td><td><h3><input type='text' placeholder='Last name' name='lname' value='%s' required></h3></td></tr>\n", $user['lname']);
+    printf("<tr><td><h3>Username:</h3></td><td><h3><input type='text' placeholder='Username' name='username' value='%s' required></h3></td></tr>\n", $user['username']);
+    printf("<tr><td><h3>Email:</h3></td><td><h3><input type='email' placeholder='Email' name='email' value='%s' required></h3></td></tr>\n", $user['email']);
+    printf("<tr><td><h3>Password:</h3></td><td><h3><input type='password' name='password' placeholder='Leave blank if unchanged'></h3></td></tr>\n");
+    printf("<tr><td><h3>Password:</h3></td><td><h3><input type='password' name='confirm_password' placeholder='Leave blank if unchanged'></h3></td></tr>\n");
+    printf("<tr><td></td><td>\n");
+    printf("<div class='btn-group'>\n");
     printf("<input type='submit' class='btn btn-success' name='submit_button' value='Save'>");
     printf("<input type='submit' class='btn btn-danger' name='submit_button' style='margin-left: 5px;' value='Cancel'></td></tr>");
-    printf("</table>");
-    printf("</form>");
+    printf("</table>\n");
+    printf("</form>\n");
     exit(0);
 }
 if (array_key_exists('edit-success', $_SESSION)) {
     unset($_SESSION['edit-success']);
-    printf("<div class='alert alert-success'> <strong>Your Profile update was successful !</strong></div>");
+    printf("<div class='alert alert-success'> <strong>Your Profile update was successful !</strong></div>\n");
 }
 if(array_key_exists('delete-success', $_SESSION)) {
     unset($_SESSION['delete-success']);
-    printf("<div class='alert alert-success'> <strong>Review has been deleted!</strong></div>");
+    printf("<div class='alert alert-success'> <strong>Review has been deleted!</strong></div>\n");
 }
 if(array_key_exists('update-success', $_SESSION)) {
     unset($_SESSION['update-success']);
-    printf("<div class='alert alert-success'> <strong>Review has been updated!</strong></div>");
+    printf("<div class='alert alert-success'> <strong>Review has been updated!</strong></div>\n");
 }
-printf("<h1><p align='center'>Profile</p></h1>");
-printf("<table class='table'>");
-printf("<tr><td><h3>Name:</h3></td><td><h3>%s %s</h3></td></tr>", $user['fname'], $user['lname']);
-printf("<tr><td><h3 >Username:</h3></td><td><h3>%s</h3></td></tr>", $user['username']);
-printf("<tr><td><h3>Email:</h3></td><td><h3>%s</h3></td></tr>", $user['email']);
-printf("<tr><td><h3>Password:</h3></td><td><h3>**********</h3></td></tr>");
-printf("<tr><td></td><td><form method='post' action='profile.php'><input type='hidden' name='edit' value='true'>" .
-    "<input type='submit' class='btn btn-default' value='Edit Profile'></form></td></tr>");
-printf("</table>");
+printf("<h1><p align='center'>Profile</p></h1>\n");
+printf("<table class='table'>\n");
+printf("<tr><td><h3>Name:</h3></td><td><h3>%s %s</h3></td></tr>\n", $user['fname'], $user['lname']);
+printf("<tr><td><h3 >Username:</h3></td><td><h3>%s</h3></td></tr>\n", $user['username']);
+printf("<tr><td><h3>Email:</h3></td><td><h3>%s</h3></td></tr>\n", $user['email']);
+printf("<tr><td><h3>Password:</h3></td><td><h3>**********</h3></td></tr>\n");
+printf("<tr><td></td><td><form method='post' action='profile.php'><input type='hidden' name='edit' value='true'>\n" .
+    "<input type='submit' class='btn btn-default' value='Edit Profile'></form></td></tr>\n");
+printf("</table>\n");
 ?>
 
 <h2><p align="center">Course Reviews</p></h2>
@@ -101,28 +101,30 @@ printf("</table>");
         }
         $review = $row['review'];
         printf("<tr>");
-        printf("<td><p><b>Course:</b> <a href='course.php?id=%s'>%s</a></p>", $course_id, $course['name']);
-        printf("<p><b>Professor:</b> <a href='professor.php?id=%s'>%s</a></p><p><b>Textbook Required:</b> %s</p></td>",
+        printf("<td><p><b>Course:</b> <a href='course.php?id=%s'>%s</a></p>\n", $course_id, $course['name']);
+        printf("<p><b>Professor:</b> <a href='professor.php?id=%s'>%s</a></p><p><b>Textbook Required:</b> %s</p></td>\n",
             $prof_id, $prof['name'], $book_required);
-        printf("<td><p><b>Review:</b> %s</p> <p><b>Usefulness:</b> %s</p> <p><b>Tips:</b> %s</p></td>", $row['review'], $row['usefulness'], $row['tips']);
-        printf("<td><p><b>Easiness:</b> %s</p> <p><b>Overall Rating:</b> %s</p>", $row['easiness'], $row['overall_rating']);
-        
-        printf("<td><form method='post' action='edit-course-review.php'>");
-        printf("<input type='hidden' name='userID' value=%d>", $_SESSION['user_id']);
-        printf("<input type='hidden' name='deptID' value=%d>", $course['dept_id']);
-        printf("<input type='hidden' name='courseID' value='$course_id'><input type='hidden' name='courseName' value='%s'>", $course['name']);
-        printf("<input type='hidden' name='profID' value=$prof_id><input type='hidden' name='profName' value='%s'>", $prof['name']);
-        printf("<input type='hidden' name='bookRequired' value='%s'>", $book_required);
-        printf("<input type='hidden' name='review' value=" . '"'. "$review" .'"' . ">");
-        printf("<input type='hidden' name='usefulness' value='%s'><input type='hidden' name='tips' value='%s'><input type='hidden' name='easiness' value=%d><input type='hidden' name='overall' value=%d>", $row['usefulness'],$row['tips'],$row['easiness'],$row['overall_rating']);
-        printf("<input type='submit' class='btn btn-default' value='Edit'></form>");
+        printf("<td><p><b>Review:</b> %s</p> <p><b>Usefulness:</b> %s</p> <p><b>Tips:</b> %s</p></td>\n", $row['review'], $row['usefulness'], $row['tips']);
+        printf("<td><p><b>Easiness:</b> %s</p> <p><b>Overall Rating:</b> %s</p>\n", $row['easiness'], $row['overall_rating']);
+
+        printf("<td><form method='post' action='edit-course-review.php'>\n");
+        printf("<input type='hidden' name='userID' value=%d>\n", $_SESSION['user_id']);
+        printf("<input type='hidden' name='deptID' value=%d>\n", $course['dept_id']);
+        printf("<input type='hidden' name='courseID' value='$course_id'>\n<input type='hidden' name='courseName' value='%s'>\n", $course['name']);
+        printf("<input type='hidden' name='profID' value=$prof_id>\n<input type='hidden' name='profName' value='%s'>\n", $prof['name']);
+        printf("<input type='hidden' name='bookRequired' value='%s'>\n", $book_required);
+        printf("<input type='hidden' name='review' value=" . '"' . "$review" . '"' . ">\n");
+        printf("<input type='hidden' name='usefulness' value='%s'>\n<input type='hidden' name='tips' value='%s'>\n" .
+            "<input type='hidden' name='easiness' value=%d>\n" .
+            "<input type='hidden' name='overall' value=%d>\n", $row['usefulness'], $row['tips'], $row['easiness'], $row['overall_rating']);
+        printf("<input type='submit' class='btn btn-default' value='Edit'></form>\n");
         
         printf("<form method='post' action='delete-review.php' onsubmit='return confirm(%s)'>", '"Are you sure you want to delete the review?"');
-        printf("<input type='hidden' name='userID' value=%d>", $_SESSION['user_id']);
-        printf("<input type='hidden' name='courseID' value='$course_id'><input type='hidden' name='courseName' value=%s>", $course['name']);
-        printf("<input type='hidden' name='profID' value=$prof_id><input type='hidden' name='profName' value=%s>", $prof['name']);
-        printf("<input type='hidden' name='deleteCourseReview' value='true'><input type='submit' name='DeleteButton' class='btn btn-default' value='Delete'></form></td>");
-        printf("</tr>");
+        printf("<input type='hidden' name='userID' value=%d>\n", $_SESSION['user_id']);
+        printf("<input type='hidden' name='courseID' value='$course_id'>\n<input type='hidden' name='courseName' value=%s>\n", $course['name']);
+        printf("<input type='hidden' name='profID' value=$prof_id>\n<input type='hidden' name='profName' value=%s>\n", $prof['name']);
+        printf("<input type='hidden' name='deleteCourseReview' value='true'>\n<input type='submit' name='DeleteButton' class='btn btn-default' value='Delete'>\n</form>\n</td>\n");
+        printf("</tr>\n");
     }
     ?>
 </table>
@@ -149,27 +151,27 @@ printf("</table>");
         $course = $course->fetch();
         $review = $row['review'];
         printf("<tr>");
-        printf("<td><p><b>Professor:</b> <a href='professor.php?id=%s'>%s</a></p>", $prof_id, $prof['name']);
-        printf("<p><b>Course:</b> <a href='course.php?id=%s'>%s</a></p></td>", $course_id, $course['name']);
-        printf("<td>%s</td>", $row['review']);
-        printf("<td><p><b>Helpfulness:</b> %s</p><p><b>Easiness:</b> %s</p><p><b>Clarity:</b> %s</p> <p><b>Overall Rating:</b> %s</p>",
+        printf("<td><p><b>Professor:</b> <a href='professor.php?id=%s'>%s</a></p>\n", $prof_id, $prof['name']);
+        printf("<p><b>Course:</b> <a href='course.php?id=%s'>%s</a></p></td>\n", $course_id, $course['name']);
+        printf("<td>%s</td>\n", $row['review']);
+        printf("<td><p><b>Helpfulness:</b> %s</p>\n<p><b>Easiness:</b> %s</p>\n<p><b>Clarity:</b> %s</p> \n<p><b>Overall Rating:</b> %s</p>\n",
             $row['helpfulness'], $row['easiness'], $row['clarity'], $row['overall_rating']);
 
-        printf("<td><form method='post' action='edit-prof-review.php'>");
-        printf("<input type='hidden' name='userID' value=%d>", $_SESSION['user_id']);
-        printf("<input type='hidden' name='deptID' value=%d>", $prof['dept_id']);
-        printf("<input type='hidden' name='courseID' value='$course_id'><input type='hidden' name='courseName' value='%s'>", $course['name']);
+        printf("<td><form method='post' action='edit-prof-review.php'>\n");
+        printf("<input type='hidden' name='userID' value=%d>\n", $_SESSION['user_id']);
+        printf("<input type='hidden' name='deptID' value=%d>\n", $prof['dept_id']);
+        printf("<input type='hidden' name='courseID' value='$course_id'>\n<input type='hidden' name='courseName' value='%s'>\n", $course['name']);
         printf("<input type='hidden' name='profID' value=$prof_id><input type='hidden' name='profName' value='%s'>", $prof['name']);
-        printf("<input type='hidden' name='review' value=" . '"'. "$review" .'"' . ">");
-        printf("<input type='hidden' name='helpfulness' value='%s'><input type='hidden' name='easiness' value=%d><input type='hidden' name='overall' value=%d>", $row['helpfulness'],$row['easiness'],$row['overall_rating']);
-        printf("<input type='hidden' name='clarity' value='%s'>", $row['clarity']);
-        printf("<input type='submit' class='btn btn-default' value='Edit'></form>");
+        printf("<input type='hidden' name='review' value=" . '"' . "$review" . '"' . ">\n");
+        printf("<input type='hidden' name='helpfulness' value='%s'>\n<input type='hidden' name='easiness' value=%d>\n<input type='hidden' name='overall' value=%d>\n", $row['helpfulness'], $row['easiness'], $row['overall_rating']);
+        printf("<input type='hidden' name='clarity' value='%s'>\n", $row['clarity']);
+        printf("<input type='submit' class='btn btn-default' value='Edit'>\n</form>\n");
 
-        printf("<form method='post' action='delete-review.php' onsubmit='return confirm(%s)'>", '"Are you sure you want to delete the review?"');
-        printf("<input type='hidden' name='userID' value=%d>", $_SESSION['user_id']);
-        printf("<input type='hidden' name='courseID' value='$course_id'><input type='hidden' name='profID' value=%d>", $row['prof_id']);
-        printf("<input type='hidden' name='deleteProfReview' value='true'><input type='submit' name='DeleteButton' class='btn btn-default' value='Delete'></form></td>");
-        printf("</tr>");
+        printf("<form method='post' action='delete-review.php' onsubmit='return confirm(%s)'>\n", '"Are you sure you want to delete the review?"');
+        printf("<input type='hidden' name='userID' value=%d>\n", $_SESSION['user_id']);
+        printf("<input type='hidden' name='courseID' value='$course_id'>\n<input type='hidden' name='profID' value=%d>\n", $row['prof_id']);
+        printf("<input type='hidden' name='deleteProfReview' value='true'>\n<input type='submit' name='DeleteButton' class='btn btn-default' value='Delete'>\n</form>\n</td>\n");
+        printf("</tr>\n");
     }
     ?>
 </table>

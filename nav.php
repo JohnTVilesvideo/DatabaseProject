@@ -40,12 +40,12 @@ if (array_key_exists('user_id', $_SESSION)) {
             <ul class="nav navbar-nav navbar-right">
                 <?php
                 if ($isLoggedIn) {
-                    printf("<p class='navbar-text'>You are logged in as</p><li><a href='profile.php'>$name</a></li>");
-                    printf("<a href='logout.php'><button type='button' onclick='' class='btn btn-default navbar-btn'>Logout</button></a>");
+                    printf("<p class='navbar-text'>You are logged in as</p><li><a href='profile.php'>$name</a></li>\n");
+                    printf("<a href='logout.php'><button type='button' onclick='' class='btn btn-default navbar-btn'>Logout</button></a>\n");
                 } else {
 
-                    printf("<a href='login.php'><button type='button' class='btn btn-default navbar-btn'>Log in</button></a>");
-                    printf("<a href='signup.php'><button type='button' class='btn btn-default navbar-btn'>Sign up</button></a>");
+                    printf("<a href='login.php'><button type='button' class='btn btn-default navbar-btn'>Log in</button></a>\n");
+                    printf("<a href='signup.php'><button type='button' class='btn btn-default navbar-btn'>Sign up</button></a>\n");
                 }
                 ?>
             </ul>
