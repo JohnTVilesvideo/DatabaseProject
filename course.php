@@ -102,18 +102,18 @@ $course = $result->fetch();
             } else {
                 $book_required = "Yes";
             }
-            printf("<tr>");
-            printf("<td><p><b>Instructor:</b> <a href='professor.php?id=%s'>%s</a></p><p><b>Textbook Required:</b> %s</p></td>",
+            printf("\t\t<tr>\n");
+            printf("\t\t\t<td><p><b>Instructor:</b> <a href='professor.php?id=%s'>%s</a></p><p><b>Textbook Required:</b> %s</p></td>\n",
                 $prof_id, $prof['name'], $book_required);
-            printf("<td><p><b>Review:</b> %s</p> <p><b>Usefulness:</b> %s</p> <p><b>Tips:</b> %s</p></td>", $row['review'], $row['usefulness'], $row['tips']);
-            printf("<td><p><b>Easiness:</b> %s</p> <p><b>Overall Rating:</b> %s</p><p><form method='post' action='report-review.php'>" .
-                "<span class='glyphicon glyphicon-exclamation-sign'></span>" .
+            printf("\t\t\t<td><p><b>Review:</b> %s</p> <p><b>Usefulness:</b> %s</p> <p><b>Tips:</b> %s</p></td>\n", $row['review'], $row['usefulness'], $row['tips']);
+            printf("\t\t\t<td><p><b>Easiness:</b> %s</p> <p><b>Overall Rating:</b> %s</p><p><form method='post' action='report-review.php'>\n" .
+                "\t\t\t\t<span class='glyphicon glyphicon-exclamation-sign'></span>" .
                 "<input type='hidden' name='review_type' value='1'>" .
                 "<input type='hidden' name='user_id' value='$user_id'>" .
                 "<input type='hidden' name='course_id' value='$course_id'>" .
                 "<input type='hidden' name='prof_id' value='$prof_id'>" .
-                "<input type='submit' class='btn btn-link' value='report'></form></p></td>", $row['easiness'], $row['overall_rating']);
-            printf("</tr>");
+                "<input type='submit' class='btn btn-link' value='report'></form></p></td>\n", $row['easiness'], $row['overall_rating']);
+            printf("\t\t</tr>\n");
         }
         ?>
     </table>

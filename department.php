@@ -44,7 +44,7 @@
                 $deptID = $row['id'];
                 if($id != $deptID){
                     $deptName = $row['name'];
-                    printf("<tr><td><a href='department.php?id=$deptID'>$deptName</a> </td></tr>");
+                    printf("\t\t\t<tr><td><a href='department.php?id=$deptID'>$deptName</a> </td></tr>\n");
                 }
             }
             ?>
@@ -54,16 +54,16 @@
 <div class="col-xs-12 col-sm-9">
 <div class="container">
     <?php
-    printf("<table align='center' cellspacing='0' cellpadding='4'>");
-    printf("<tr><td><h2>%s (%s)</h2></td></tr>", $department['name'], $department['code']);
-    printf("<tr><td><h3><a href='college.php?id=%s'>%s</a> </h3></td></tr>", $department['college_id'], $college['name']);
-    printf("<tr><td><h3>%s, %s</h3></td></tr>", $college['city'], $college['state']);
+    printf("<table align='center' cellspacing='0' cellpadding='4'>\n");
+    printf("\t\t<tr><td><h2>%s (%s)</h2></td></tr>\n", $department['name'], $department['code']);
+    printf("\t\t<tr><td><h3><a href='college.php?id=%s'>%s</a> </h3></td></tr>\n", $department['college_id'], $college['name']);
+    printf("\t\t<tr><td><h3>%s, %s</h3></td></tr>\n", $college['city'], $college['state']);
     $website = $department['website'];
     if (!(substr($website, 0, 4) == "http")) {
         $website = "http://" . $website;
     }
-    printf("<tr><td><h3> Department Website : <a href='%s'>%s</a></h3></td></tr>", $website, $website);
-    printf("</table>");
+    printf("\t\t<tr><td><h3> Department Website : <a href='%s'>%s</a></h3></td></tr>\n", $website, $website);
+    printf("\t</table>");
     ?>
 </div>
 
@@ -87,7 +87,7 @@
             } else {
                 $avgRating = sprintf("%.1f", $avgRating);
             }
-            printf("<tr><td><a href='course.php?id=%s'>%s</a></td> <td>%s</td></tr>", $row['id'], $row['name'], $avgRating);
+            printf("\t\t<tr><td><a href='course.php?id=%s'>%s</a></td> <td>%s</td></tr>\n", $row['id'], $row['name'], $avgRating);
         }
         ?>
 
@@ -115,7 +115,7 @@
             } else {
                 $avgRating = sprintf("%.1f", $avgRating);
             }
-            printf("<tr><td><a href='professor.php?id=%s'>%s</a></td> <td>%s</td></tr>", $row['id'], $row['name'], $avgRating);
+            printf("\t\t<tr><td><a href='professor.php?id=%s'>%s</a></td> <td>%s</td></tr>\n", $row['id'], $row['name'], $avgRating);
         }
         ?>
 

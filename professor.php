@@ -98,18 +98,18 @@ $professor = $result->fetch();
             $result = $db->prepare("SELECT name FROM course WHERE id=?;");
             $result->execute(array($course_id));
             $course = $result->fetch();
-            printf("<tr>");
-            printf("<td><a href='course.php?id=%s'>%s</a></td>", $course_id, $course['name']);
-            printf("<td>%s</td>", $row['review']);
-            printf("<td><p><b>Helpfulness:</b> %s</p><p><b>Easiness:</b> %s</p><p><b>Clarity:</b> %s</p> <p><b>Overall Rating:</b> %s</p><p><form method='post' action='report-review.php'>" .
-                "<span class='glyphicon glyphicon-exclamation-sign'></span>" .
+            printf("\t\t<tr>\n");
+            printf("\t\t\t<td><a href='course.php?id=%s'>%s</a></td>\n", $course_id, $course['name']);
+            printf("\t\t\t<td>%s</td>\n", $row['review']);
+            printf("\t\t\t<td><p><b>Helpfulness:</b> %s</p><p><b>Easiness:</b> %s</p><p><b>Clarity:</b> %s</p> <p><b>Overall Rating:</b> %s</p><p><form method='post' action='report-review.php'>\n" .
+                "\t\t\t\t<span class='glyphicon glyphicon-exclamation-sign'></span>" .
                 "<input type='hidden' name='review_type' value='0'>" .
                 "<input type='hidden' name='user_id' value='$user_id'>" .
                 "<input type='hidden' name='course_id' value='$course_id'>" .
                 "<input type='hidden' name='prof_id' value='$prof_id'>" .
-                "<input type='submit' class='btn btn-link' value='report'></form></p></td>",
+                "<input type='submit' class='btn btn-link' value='report'></form></p></td>\n",
                 $row['helpfulness'], $row['easiness'], $row['clarity'], $row['overall_rating']);
-            printf("</tr>");
+            printf("\t\t</tr>\n");
         }
         ?>
     </table>

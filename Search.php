@@ -21,136 +21,123 @@
 <?php
 $isDepartment = array_key_exists('Department', $_POST);
 $isCourse = array_key_exists('Course', $_POST);
+$count = 0;
 if ($isCourse) {
-    $course = $_POST['Course'];
-    $college = $_POST['College'];
-    $result = $db->prepare("SELECT course.id AS courseID, course.name AS courseName, department.id AS deptID, department.name AS deptName, " .
-        "college.id AS collegeID, college.name AS collegeName" .
-        " FROM (course JOIN department ON course.dept_id=department.id) JOIN college ON college_id=college.id" .
-        " WHERE (course.name LIKE ? OR course.code LIKE ?) AND college.name LIKE ?;");
-    $result->execute(array("%$course%", "%$course", "%$college%"));
-    $courseCount = $result->rowCount();
-    if ($courseCount > 0) {
-        echo "<h2 align='center' style='color: dodgerblue;'>COURSES</h2>";
-        echo "<table id='search' class='table-striped table-bordered' align='center' width='80%' cellspacing='0'>";
-    }
-    foreach ($result as $row) {
-        $courseID = $row['courseID'];
-        $courseName = $row['courseName'];
-        $deptID = $row['deptID'];
-        $deptName = $row['deptName'];
-        $collegeID = $row['collegeID'];
-        $collegeName = $row['collegeName'];
-        printf("<tr><td><b><h3><a href='course.php?id=$courseID'>$courseName</a></h3></b><h5><p><a href='department.php?id=$deptID'>$deptName</a>" .
-            "</p><p><a href='college.php?id=$collegeID'>$collegeName</a> </p></h5></td><td><form class='navbar-form' method='POST' action='course-review.php'>" .
-            "<input type='hidden' name='course_id' value='$courseID'><button type='success'class='btn btn-primary btn-md'>Rate this Course</button></form></td></tr>");
-    }
-    if ($courseCount > 0) {
-        echo "</table>";
-    } else {
-        echo "<h3><p align='center'>Sorry, Your search didn't return any results.</p></h3>";
-    }
+    $count = search($db, "course");
 } else if ($isDepartment) {
-    $dept = $_POST['Department'];
-    $college = $_POST['College'];
-    $result = $db->prepare("SELECT * FROM college WHERE name LIKE ?");
-    $result->execute(array("%$college%"));
-    $collegeCount = $result->rowCount();
-    $deptCount = 0;
-    $headerSet = false;
-    if ($collegeCount != 0) {
-        foreach ($result as $col) {
-            $colID = $col['id'];
-            $colName = $col['name'];
-            $collegeAddress = $col['city'] . ", " . $col['state'];
-            $depts = $db->prepare("SELECT * FROM department WHERE college_id=? AND name LIKE ?;");
-            $depts->execute(array($colID, "%$dept%"));
-            $deptCount += $depts->rowCount();
-            if ($depts->rowCount() != 0) {
-                if (!$headerSet) {
-                    $headerSet = true;
-                    echo "<h2 align='center'style='color: dodgerblue;'>DEPARTMENT</h2>";
-                    echo "<table class='table-striped table-bordered' align='center' width='80%'>";
-                }
-                foreach ($depts as $dep) {
-                    $deptID = $dep['id'];
-                    $deptName = $dep['name'];
-                    $website = $dep['website'];
-                    printf("<tr><td><b><h3><a href='department.php?id=$deptID'>$deptName</a></h3></b>" .
-                        "<h4><p><a href='college.php?id=$colID'>$colName</a></p>" .
-                        "<p>$collegeAddress</p></h4></td></tr>");
-                }
-            }
-        }
-    }
-    if ($deptCount == 0) {
-        echo "<h3><p align='center'>Sorry, Your search didn't return any results.</p></h3>";
-    } else {
-        printf("</table>");
-    }
+    $count = search($db, "department");
 } else {
-    $profCount = 0;
     if (!(array_key_exists('collegeOnly', $_POST))) {
-        $searchQuery = $_POST['query'];
-        $result = $db->prepare("SELECT * FROM professor WHERE name LIKE ?;");
-        $result->execute(array("%$searchQuery%"));
-        $profCount = $result->rowCount();
-        if ($profCount != 0) {
-            printf("<h2 align='center' style='color: dodgerblue;'>PROFESSORS</h2> <br>");
-            echo "<table  class='table-striped table-bordered' align='center' width='80%'>";
-            foreach ($result as $row) {
-                $profName = $row['name'];
-                $profId = $row['id'];
-                $deptId = $row['dept_id'];
-                $deptCol = $db->prepare("SELECT department.name AS deptName, college.name AS colName, college.id AS colID" .
-                    " FROM department JOIN college ON department.id=? AND college_id=college.id;");
-                $deptCol->execute(array($deptId));
-                $deptCol = $deptCol->fetch();
-                printf("<tr><td><b><h3><a href='professor.php?id=$profId'>$profName</a></h3></b>" .
-                    "<h4><p><a href='department.php?id=$deptId'>%s Department</a></p>" .
-                    "<p><a href='college.php?id=%d'>%s</a></p></h4></td>" .
-                    "<td><form class='navbar-form' method='POST' action='professor-review.php'><input type='hidden' name='professor_id' value='$profId'>" .
-                    "<button type='success'class='btn btn-primary btn-md'>Rate this Professor</button></form></td></tr>", $deptCol['deptName'], $deptCol['colID'], $deptCol['colName']);
+        $count += search($db, "professor");
+    }
+    if (!(array_key_exists('professorOnly', $_POST))) {
+        $count += search($db, "college");
+    }
+}
+if ($count <= 0) {
+    echo "<h3><p align='center'>Sorry, Your search didn't return any results.</p></h3>";
+}
+
+function search($db, $target) {
+    $query = "SELECT * FROM $target WHERE name LIKE ?;";
+    $param = null;
+    if ($target == "course") {
+        $course = $_POST['Course'];
+        $college = $_POST['College'];
+        $query = "SELECT course.id AS id, course.name AS name, department.id AS dept_id, department.name AS deptName, " .
+            "college.id AS collegeID, college.name AS collegeName" .
+            " FROM (course JOIN department ON course.dept_id=department.id) JOIN college ON college_id=college.id" .
+            " WHERE (course.name LIKE ? OR course.code LIKE ?) AND college.name LIKE ?;";
+        $param = array("%$course%", "%$course", "%$college%");
+    }
+    else {
+        $searchQuery = null;
+        if ($target == "department") {
+            $query = "SELECT * FROM college WHERE name LIKE ?;";
+            $searchQuery = $_POST['College'];
+            $param = array("%$searchQuery%");
+        }
+        else { // professor and college
+            if (array_key_exists('state', $_POST)) {
+                $searchQuery = $_POST['state'];
+                $query = "SELECT * FROM college WHERE state=?;";
+                $param = array($searchQuery);
             }
-            printf("</table>");
+            else {
+                $searchQuery = $_POST['query'];
+                $param = array("%$searchQuery%");
+            }
         }
     }
-    $colCount = 0;
-    if (!(array_key_exists('professorOnly', $_POST))) {
-        if (array_key_exists('state', $_POST)) {
-            $searchQuery = $_POST['state'];
-            $result = $db->prepare("SELECT * FROM college WHERE state=?;");
-            $result->execute(array($searchQuery));
-        } else {
-            $searchQuery = $_POST['query'];
-            $result = $db->prepare("SELECT * FROM college WHERE name LIKE ?;");
-            $result->execute(array("%$searchQuery%"));
-        }
-        $colCount = $result->rowCount();
-        if ($colCount != 0) {
-            printf("<h2 align='center'  style='color: dodgerblue;'>COLLEGES</h2> <br>");
-            echo "<table  class='table-striped table-bordered' align='center' width='80%'>";
-            foreach ($result as $row) {
-                $colName = $row['name'];
-                $colId = $row['id'];
+    $result = $db->prepare($query);
+    $result->execute($param);
+    $rowCount = $result->rowCount();
+    $deptCount = 0;
+    if ($rowCount > 0) {
+        echo "<h2 align='center' style='color: dodgerblue;'>" . strtoupper($target) . "</h2><br>\n";
+        echo "<table id='search' class='table-striped table-bordered' align='center' width='80%' cellspacing='0'>\n";
+
+        foreach ($result as $row) {
+            $name = $row['name'];
+            $id = $row['id'];
+            $deptCol = $row;
+            $deptName = null; $collegeID = null; $collegeName = null; $city = null; $state = null; $website = null;
+            if ($target == "professor") {
+                $deptCol = $db->prepare("SELECT department.name AS deptName, college.name AS collegeName, college.id AS collegeID" .
+                    " FROM department JOIN college ON department.id=? AND college_id=college.id;");
+                $deptCol->execute(array($row['dept_id']));
+                $deptCol = $deptCol->fetch();
+            }
+            if ($target == "course" || $target == "professor") {
+                $deptName = $deptCol['deptName'];
+                $collegeID = $deptCol['collegeID'];
+                $collegeName = $deptCol['collegeName'];
+            }
+            else {
                 $city = $row['city'];
                 $state = $row['state'];
                 $website = $row['website'];
                 if (!(substr($website, 0, 4) == "http")) {
                     $website = "http://" . $website;
                 }
-                echo "<tr><td><b><h3><a href='college.php?id=$colId'>$colName</a></h3></b><h4><p>$city, $state</p> <p><a href='$website'>$website</a></p></h4></td></tr>";
+                $collegeAddress = $city . ", " . $state;
             }
-            printf("</table>");
+
+            if ($target == "department") {
+                $dept = $_POST['Department'];
+                $depts = $db->prepare("SELECT * FROM department WHERE college_id=? AND name LIKE ?;");
+                $depts->execute(array($id, "%$dept%"));
+                $deptCount += $depts->rowCount();
+                if ($depts->rowCount() != 0) {
+                    foreach ($depts as $dep) {
+                        printf("\t<tr>\n");
+                        printf("\t\t<td><b><h3><a href='department.php?id=%s'>%s</a></h3></b>" .
+                            "<h4><p><a href='college.php?id=$id'>$name</a></p>" .
+                            "<p>$collegeAddress</p></h4></td>\n", $dep['id'], $dep['name']);
+                        printf("\t</tr>\n");
+                    }
+                }
+                $rowCount = $deptCount;
+            }
+            else {
+                printf("\t<tr>\n");
+                printf("\t\t<td><b><h3><a href='$target.php?id=$id'>$name</a></h3></b>");
+                if ($target == "college") {
+                    printf("<h4><p>$city, $state</p> <p><a href='$website'>$website</a></p></h4></td>\n");
+                } else {
+                    printf("<h4><p><a href='department.php?id=%s'>$deptName</a></p>", $row['dept_id']);
+                    printf("<p><a href='college.php?id=$collegeID'>$collegeName</a></p></h4></td>\n");
+                    printf("\t\t<td><form class='navbar-form' method='POST' action='$target-review.php'><input type='hidden' name='$target" . "_id' value='$id'>" .
+                        "<button type='success' class='btn btn-primary btn-md'>Rate this " . strtoupper(substr($target,0,1)).substr($target,1));
+                    printf("</button></form></td>\n");
+                }
+                printf("\t</tr>\n");
+            }
         }
+        printf("</table>\n");
     }
-    if ($profCount + $colCount == 0) {
-        echo "<h3><p align='center'>Sorry, Your search didn't return any results.</p></h3>";
-    }
+    return $rowCount;
 }
-
 ?>
-
 </body>
-
 </html>
