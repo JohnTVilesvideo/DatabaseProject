@@ -43,6 +43,15 @@
             printf("<div class='alert alert-success'> <strong>Sign up Successful !</strong> You have successfully signed up." .
                 " Please use your username and password to log in.</div>");
         }
+        if (array_key_exists('reset_success', $_SESSION)) {
+            unset($_SESSION['reset_success']);
+            printf("<div class='alert alert-success'> <strong>Password Reset Email sent ! <br></strong>An email with the instruction to reset" .
+                " your password has been sent to the email address associated with your account. Please follow the instruction in the email.</div>");
+        }
+        if (array_key_exists('pass_change_success', $_SESSION)) {
+            unset($_SESSION['pass_change_success']);
+            printf("<div class='alert alert-success'> <strong>Password Successfully Changed ! <br></strong>Please log in using the form below:</div>");
+        }
 
         // Test redirect from $_GET
         echo '<input type="hidden" name="location" value="';
@@ -70,7 +79,7 @@
             if(isset($_GET['id'])) {
                 echo "&id=" . urlencode($_GET['id']) . "'";
             }
-            printf(">Register</a><a href='#'>Forgot Password</a></p>");
+        printf("'>Register</a> - <a href='password-reset.php'>Forgot Password</a></p>");
         ?>
     </form>
 
