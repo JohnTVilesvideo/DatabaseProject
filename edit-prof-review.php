@@ -18,7 +18,7 @@
     $prof_id = $_POST['profID'];
     $prof_name = $_POST['profName'];
     $dept_id = $_POST['deptID'];
-    $query = "SELECT department.name AS department, college.name AS college FROM department JOIN college ON department.college_id=college.id WHERE department.id=?;";
+    $query = "SELECT department.name AS department, college.id AS collegeID, college.name AS college FROM department JOIN college ON department.college_id=college.id WHERE department.id=?;";
     $dept = $db->prepare($query);
     $dept->execute(array($dept_id));
     $dept = $dept->fetch();
@@ -53,7 +53,8 @@
 <body style="background: url('img/pattern.png');">
 <div class="container">
     <?php
-    printf("<h3 style='text-align: center'>Update review for<br> <p>$prof_name</p><p>%s, %s</p></h3>",$dept['department'], $dept['college']);
+    printf("<h3 style='text-align: center'>Update review for<br> <p><a href='professor.php?id=$prof_id'>$prof_name</a></p>".
+        "<p><a href='department.php?id=$dept_id'>%s</a>, <a href='college.php?id=%d'>%s</a></p></h3>",$dept['department'], $dept['collegeID'], $dept['college']);
     ?>
 </div>
 
