@@ -1,7 +1,12 @@
 <html>
 <head>
     <?php
-
+    /**
+     * course-review.php
+     * Review a course. User have to specify the professor they took the course with
+     * and have the option to add a new professor if they don't find their professor in the database
+     * Author: Dung, Amrit
+     */
     include_once('db_connect.php');
     include_once('links.html');
     include('nav.php');

@@ -3,9 +3,11 @@
 <head>
     <?php
     /**
+     * department.php
+     * Department profile page. Display information of the department,
+     * all the courses and professors of that department and their average rating.
+     * Also display other departments of the same college
      * Author: Amrit
-     * Date: 3/12/16
-     * Time: 3:18 PM
      */
     include_once('db_connect.php');
     include_once('links.html');

@@ -1,8 +1,10 @@
 <?php
 /**
+ * delete-review.php
+ * Functionality of user profile page. 
+ * Authorizing deleting a review the user have written. No verification needed since
+ * in the profile page we have asked the user to confirm their action
  * Author: Dung Truong
- * Date: 4/30/16
- * Time: 9:25 PM
  */
 
 include_once('db_connect.php');

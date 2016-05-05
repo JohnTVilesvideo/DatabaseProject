@@ -1,8 +1,9 @@
 <?php
 /**
- * Author: Amrit
- * Date: 4/16/16
- * Time: 7:36 PM
+ * add-professor-review.php
+ * Authorizing adding a review to a professor. User can review a professor multiple times
+ * as long as they took multiple courses with that professor
+ * Author: Amrit, Dung
  */
 include_once('db_connect.php');
 session_start();

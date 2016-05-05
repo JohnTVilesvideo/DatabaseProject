@@ -1,8 +1,10 @@
 <?php
 /**
- * Author: Amrit
- * Date: 4/17/16
- * Time: 4:58 PM
+ * add-course-auth.php
+ * Authorizing inserting new course to the database
+ * Handling insertion errors when course already exists in the database
+ * or when department or college is not found
+ * Author: Amrit, Dung
  */
 include_once('db_connect.php');
 session_start();

@@ -1,3 +1,8 @@
+<!--
+- add-professor.php
+- Access from Course Review page, when user can't find the professor they took the course with
+- Add new professor to the database with given college and department (user can't change those two information)
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>

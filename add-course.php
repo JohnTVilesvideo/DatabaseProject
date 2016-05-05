@@ -4,14 +4,18 @@
     <meta charset="utf-8">
     <title>Add a Course | Rate my Course</title>
     <?php
-
+    /**
+     * add-course.php
+     * Access from Professor Review page, when user can't find the course they took with that professor
+     * Add new course to the database with given college and department (user can't change those two information)
+     * Author: Amrit, Dung
+     */
     include_once('db_connect.php');
     include_once('links.html');
     include('nav.php');
 
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['redirect'] = $_SERVER['HTTP_REFERER'];
-        //TODO:Some sort of message in login page telling them that they need to log in
         header('Location:login.php');
     }
     $userID = $_SESSION['user_id'];

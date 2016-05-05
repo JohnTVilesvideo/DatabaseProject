@@ -1,8 +1,8 @@
 <?php
 /**
- * User: Amrit Dhakal
- * Date: 5/4/16
- * Time: 4:08 PM
+ * change-password-auth.php
+ * Authorizing reseting password. Handle error when user
+ * have mismatch password when retyping
  */
 include_once('db_connect.php');
 session_start();

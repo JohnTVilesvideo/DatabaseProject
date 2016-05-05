@@ -1,5 +1,8 @@
 <?php
-// script to connect to mysql server
+/**
+ * db_connect.php
+ * Script to connect to mysql server
+ */
 
 $server = 'ada.cc.gettysburg.edu';
 $port = 3306;

@@ -4,10 +4,9 @@
     <?php
 
     /**
-     * Created by PhpStorm.
+     * edit-course-review.php
+     * Let user edit a written review for a course.
      * User: Dung Truong
-     * Date: 4/30/2016
-     * Time: 10:17 PM
      */
 
     include_once('db_connect.php');

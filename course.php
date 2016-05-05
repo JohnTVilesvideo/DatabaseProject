@@ -1,8 +1,9 @@
 <?php
 /**
- * Author: Amrit
- * Date: 3/12/16
- * Time: 3:18 PM
+ * course.php
+ * Profile page for course. Display information of the course,
+ * all reviews of that course and other course within the same department
+ * Author: Amrit, Dung
  */
 include_once('db_connect.php');
 include_once('links.html');

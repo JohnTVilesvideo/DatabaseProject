@@ -4,9 +4,10 @@
 <head>
     <?php
     /**
+     * college.php
+     * Profile page for college. Display information of the college,
+     * all professor and department, as well as other colleges of the same state
      * Author: Amrit
-     * Date: 3/12/16
-     * Time: 3:18 PM
      */
     include_once('db_connect.php');
     include_once('links.html');

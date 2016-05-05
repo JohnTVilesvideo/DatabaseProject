@@ -1,8 +1,8 @@
 <?php
 /**
+ * edit-profile.php
+ * Let user edit their profile information
  * Author: Amrit
- * Date: 4/24/16
- * Time: 2:48 AM
  */
 
 include_once('db_connect.php');
