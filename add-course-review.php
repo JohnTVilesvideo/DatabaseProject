@@ -1,8 +1,9 @@
 <?php
 /**
- * Author: Amrit
- * Date: 4/16/16
- * Time: 7:36 PM
+ * add-course-review.php
+ * Authorizing adding review of a course. User can review a course multiple times 
+ * as long as they took the course with different professors 
+ * Author: Amrit, Dung
  */
 include_once('db_connect.php');
 session_start();
