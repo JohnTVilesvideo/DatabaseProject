@@ -1,9 +1,9 @@
 <?php
 /**
  * course.php
- * Profile page for course. Display information of the course,
- * all reviews of that course and other course within the same department
- * Author: Amrit, Dung
+ * Profile page for course.
+ * Displays course information as well as the reviews associated with the course.
+ * Sidebar displays the list of other courses offered by the same department.
  */
 include_once('db_connect.php');
 include_once('links.html');

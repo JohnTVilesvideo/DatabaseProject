@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Script to authenticate and log in the user.
+ * Errors will be produced if the user with the given username
+ * and password does not exist in the database.
+ */
 include_once('db_connect.php');
 
 $username = $_POST['username'];

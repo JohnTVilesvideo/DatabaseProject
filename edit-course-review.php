@@ -5,8 +5,8 @@
 
     /**
      * edit-course-review.php
-     * Let user edit a written review for a course.
-     * User: Dung Truong
+     * Form to edit a course review already in the database.
+     * This form can only be accessed from a user's profile page.
      */
 
     include_once('db_connect.php');

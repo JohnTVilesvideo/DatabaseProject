@@ -1,8 +1,7 @@
 <?php
 /**
  * edit-course-review-auth.php
- * Authorizing updating review for a course
- * Author: Dung Truong
+ * Script to authenticate and update course review in the database.
  */
 include_once('db_connect.php');
 

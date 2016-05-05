@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php
+    /*
+     * signup.php
+     * Form to allow users to create an account.
+     * Account is required for posting reviews and adding professors and courses.
+     */
+    ?>
     <meta charset="utf-8">
     <title>Sign up | Rate my Professor</title>
     <!-- Custom styles for this template -->
@@ -9,14 +16,6 @@
     include_once('db_connect.php');
     include_once('links.html');
     include('nav.php');
-    /*if (array_key_exists('redirect', $_SESSION)) {
-        $lastPage = $_SESSION['redirect'];
-    } else if (array_key_exists('HTTP_REFERER', $_SERVER)) {
-        $lastPage = $_SERVER['HTTP_REFERER'];
-    } else {
-
-        $lastPage = "http://cs.gettysburg.edu/~dhakam01/cs360/project/Bootstrap/index.php"; //TODO: dynamically figure out the home url
-    }*/
     if (array_key_exists('signup_failed', $_SESSION)) {
         $signupFailed = true;
         $invalidUsername = array_key_exists('invalid_username', $_SESSION);

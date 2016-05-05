@@ -1,8 +1,9 @@
 <?php
 /**
  * change-password-auth.php
- * Authorizing reseting password. Handle error when user
- * have mismatch password when retyping
+ * Script to authenticate resetting the password.
+ * Appropriate errors will be produced in case the password
+ * and the confirm password do not match.
  */
 include_once('db_connect.php');
 session_start();

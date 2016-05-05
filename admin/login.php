@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php
+    /*
+     * admin/login.php
+     * Login page for moderators used for accessing Administrative section.
+     */
+    ?>
     <meta charset="utf-8">
     <title>Log in | Rate my Professor</title>
     <!-- Custom styles for this template -->

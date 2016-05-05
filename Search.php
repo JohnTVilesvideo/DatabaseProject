@@ -3,8 +3,8 @@
     <?php
     /**
      * Search.php
-     * Handling all search requests
-     * Author: Amrit
+     * Handles all search requests and displays results
+     * Search can be performed for College, Department, Professor and Course.
      */
     include_once('db_connect.php');
     include_once('links.html');

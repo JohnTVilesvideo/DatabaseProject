@@ -1,8 +1,11 @@
 <?php
 /**
- * Author: Amrit
- * Date: 5/4/16
- * Time: 12:12 AM
+ * reset-password-auth.php
+ * Script to authenticate password reset request.
+ * The script will check to see if the user with the given username or
+ * email exists in the database and produce appropriate error message if not.
+ * If the user exists, en email with the link to reset password is sent to
+ * the email address associated with the user account.
  */
 include_once('db_connect.php');
 $info = $_POST['username_or_email'];

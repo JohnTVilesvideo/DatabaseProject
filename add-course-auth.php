@@ -1,10 +1,11 @@
 <?php
 /**
  * add-course-auth.php
- * Authorizing inserting new course to the database
- * Handling insertion errors when course already exists in the database
- * or when department or college is not found
- * Author: Amrit, Dung
+ * Script to authenticate addition of new course into the database.
+ * In case the department and the college were entered by user themselves (not auto filled by us),
+ * checks are done to make sure that the college exists and the department exists in the given college.
+ * Appropriate errors are produced when the college or department does not exist or the course already exists
+ * in the given department.
  */
 include_once('db_connect.php');
 session_start();

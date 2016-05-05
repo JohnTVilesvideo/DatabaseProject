@@ -1,8 +1,11 @@
 <?php
 /**
- * Author: Amrit
- * Date: 4/4/16
- * Time: 1:24 PM
+ * nav.php
+ * Navigation bar
+ * Contains a search bar for searching for professor or college.
+ * Also contains user's session information as well as buttons for log in and sign up
+ * in case the user is not logged in. Otherwise, a link to users profile page and a
+ * logout button will be provided.
  */
 
 include_once('db_connect.php');

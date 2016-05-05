@@ -5,9 +5,11 @@
     </title>
     <?php
     /**
-     * Author: Amrit
-     * Date: 5/3/16
-     * Time: 4:26 PM
+     * password-reset.php
+     * Password reset form.
+     * If the url contains the authentication token and the token is valid and has not expired,
+     * a form will be shown for entering new password. Otherwise, a form will be displayed asking user
+     * to enter their username or password associated with their account.
      */
     include_once('db_connect.php');
     include_once('links.html');

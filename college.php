@@ -5,9 +5,9 @@
     <?php
     /**
      * college.php
-     * Profile page for college. Display information of the college,
-     * all professor and department, as well as other colleges of the same state
-     * Author: Amrit
+     * Profile page for college.
+     * Displays college information as well as professors and the departments associated with them.
+     * The sidebar display the list of college from the same states.
      */
     include_once('db_connect.php');
     include_once('links.html');

@@ -3,9 +3,10 @@
     <?php
     /**
      * course-review.php
-     * Review a course. User have to specify the professor they took the course with
-     * and have the option to add a new professor if they don't find their professor in the database
-     * Author: Dung, Amrit
+     * From to add a course review.
+     * User has to select a professor associated with the course review from
+     * the list of professors from the same department as the course.
+     * Users can add a new professor if the professor does not exist in the database.
      */
     include_once('db_connect.php');
     include_once('links.html');

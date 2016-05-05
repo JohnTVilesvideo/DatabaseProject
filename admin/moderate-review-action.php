@@ -1,4 +1,12 @@
 <?php
+/**
+ * admin/moderate-review-action.php
+ * Script to update the database based on moderators action
+ * If the moderator decided to delete the reported review,
+ * the review and associated reporting will be remove from database.
+ * If the moderator decides to dismiss the reports associated with the review,
+ * they will be deleted from the database.
+ */
 include_once('../db_connect.php');
 session_start();
 

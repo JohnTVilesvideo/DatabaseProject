@@ -1,7 +1,13 @@
 <html>
 <head>
     <?php
-
+    /**
+     * professor-review.php
+     * From to add a professor review.
+     * User has to select a course associated with the professor review from
+     * the list of courses from the same department as the course.
+     * Users can add a new course if the course does not exist in the database.
+     */
     include_once('db_connect.php');
     include_once('links.html');
     include('nav.php');

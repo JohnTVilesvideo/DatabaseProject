@@ -1,8 +1,10 @@
 <?php
 /**
  * edit-profile.php
- * Let user edit their profile information
- * Author: Amrit
+ * Script to authenticate and update users profile
+ * Password will not be updated if it is left blank.
+ * Appropriate error message is produced in case the password
+ * and the confirm password do not match.
  */
 
 include_once('db_connect.php');

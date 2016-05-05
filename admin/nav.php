@@ -1,8 +1,9 @@
 <?php
 /**
- * Author: Amrit
- * Date: 4/4/16
- * Time: 1:24 PM
+ * admin/nav.php
+ * Navigation bar for Administrative Area.
+ * Displays logo, Session information along with buttons to login,
+ * logout, access profile and homepage
  */
 
 include_once('../db_connect.php');
@@ -34,10 +35,10 @@ if (array_key_exists('user_id', $_SESSION)) {
             <ul class="nav navbar-nav navbar-right">
                 <?php
                 if ($isLoggedIn) {
-                    printf("<p class='navbar-text'>You are logged in as</p><li><a href='../profile.php'>$name</a></li>");
-                    printf("<a href='logout.php'><button type='button' onclick='' class='btn btn-default navbar-btn'>Logout</button></a>");
+                    printf("<p class='navbar-text'>You are logged in as</p><li><a href='../profile.php'>$name</a></li>\n");
+                    printf("<a href='logout.php'><button type='button' onclick='' class='btn btn-default navbar-btn'>Logout</button></a>\n");
                 } else {
-                    printf("<a href='login.php'><button type='button' class='btn btn-default navbar-btn'>Log in</button></a>");
+                    printf("<a href='login.php'><button type='button' class='btn btn-default navbar-btn'>Log in</button></a>\n");
                 }
                 ?>
                 <a href='../index.php'>

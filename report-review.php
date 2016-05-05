@@ -1,8 +1,9 @@
 <?php
 /**
- * Author: Amrit
- * Date: 4/23/16
- * Time: 9:30 PM
+ * report-review.php
+ * Script to add a report associated with a review to the database.
+ * Appropriate confirmation message is produced after successful reporting.
+ * Reviews can be reported without logging in. So, no authentication is required.
  */
 include_once("db_connect.php");
 session_start();

@@ -1,5 +1,11 @@
 <?php
-
+/*
+ * admin/login-auth.php
+ * Script to authenticate log in to the administrative area.
+ * On top of checking to see if the account exists in the database,
+ * this script also checks to see if the user is authorized to access the
+ * administrative area and produces appropriate error message if not.
+ */
 include_once('../db_connect.php');
 
 $username = $_POST['username'];

@@ -1,10 +1,10 @@
 <?php
 /**
  * delete-review.php
- * Functionality of user profile page. 
- * Authorizing deleting a review the user have written. No verification needed since
- * in the profile page we have asked the user to confirm their action
- * Author: Dung Truong
+ * Script to delete a professor or a course review from the database.
+ * No authentication is required since this option is only available
+ * in the user profile page. Additional confirmation prompt is displayed
+ * in the profile page before deleting the review.
  */
 
 include_once('db_connect.php');

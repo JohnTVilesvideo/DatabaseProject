@@ -1,5 +1,13 @@
 <?php
-
+/*
+ * signup-auth.php
+ * Script to authenticate and add new user account to the database.
+ * Checks are done to make sure that the username and the email entered
+ * by the user does not exist in the database. Appropriate error message
+ * is produced if either of them already exists in the database.
+ * Error message will also be produced if the password and the confirmation password do not match.
+ * Password is hashed using md5 before storing in the database.
+ */
 include_once('db_connect.php');
 session_start();
 

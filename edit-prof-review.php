@@ -5,8 +5,8 @@
 
     /**
      * edit-prof-review.php
-     * Let user edit a written review for a professor.
-     * User: Dung Truong
+     * Form to edit a professor review already in the database.
+     * This form can only be accessed from user's profile page.
      */
 
     include_once('db_connect.php');

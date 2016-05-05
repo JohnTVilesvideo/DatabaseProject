@@ -4,10 +4,10 @@
     <?php
     /**
      * department.php
-     * Department profile page. Display information of the department,
-     * all the courses and professors of that department and their average rating.
-     * Also display other departments of the same college
-     * Author: Amrit
+     * Department profile page.
+     * Display department information as well as list of the courses and professors
+     * in the department along with their average rating.
+     * Sidebar displays the list of other departments from the same college.
      */
     include_once('db_connect.php');
     include_once('links.html');

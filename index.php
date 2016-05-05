@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <?php
+    /*
+     * index.php
+     * Homepage
+     * Contains Search form to search for college, department, professor or course.
+     * Also contains information on how to use search functionality and add reviews.
+     */
+    ?>
     <meta charset="utf-8"/>
     <title>Rate My Professor</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">

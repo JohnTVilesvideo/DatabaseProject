@@ -1,8 +1,9 @@
 <?php
 /**
- * Author: Amrit
- * Date: 3/12/16
- * Time: 3:18 PM
+ * professor.php
+ * Profile page for professor.
+ * Displays professor information as well as the reviews associated with the professor.
+ * Sidebar displays the list of other professors in the same department.
  */
 include_once('db_connect.php');
 include_once('links.html');

@@ -1,11 +1,15 @@
-<!--
-- add-professor.php
-- Access from Course Review page, when user can't find the professor they took the course with
-- Add new professor to the database with given college and department (user can't change those two information)
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?
+    /*
+     * add-professor.php
+     * Form to add new professor to the database.
+     * If the user came to this page while trying to add a course review, college and department field will be
+     * filled with the college and department associated with the professor. User will not be allowed to change these fields.
+     * Otherwise, user will have to fill all of the information.
+     */
+    ?>
     <meta charset="utf-8">
     <title>Add a Professor | Rate my Professor</title>
     <?php
@@ -16,7 +20,6 @@
 
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['redirect'] = $_SERVER['HTTP_REFERER'];
-        //TODO:Some sort of message in login page telling them that they need to log in
         header('Location:login.php');
     }
     $userID = $_SESSION['user_id'];

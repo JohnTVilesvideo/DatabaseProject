@@ -6,9 +6,9 @@
     <?php
     /**
      * add-course.php
-     * Access from Professor Review page, when user can't find the course they took with that professor
-     * Add new course to the database with given college and department (user can't change those two information)
-     * Author: Amrit, Dung
+     * Form to add a new course. If the user accessed this page while trying to add professor review, the department and
+     * the college will be filled in for them and it cannot be changed. Otherwise, the user will have to enter the college
+     * and the department information.
      */
     include_once('db_connect.php');
     include_once('links.html');

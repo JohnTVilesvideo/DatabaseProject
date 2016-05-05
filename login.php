@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php
+    /*
+     * login.php
+     * Login form
+     * Allows user to log in or create account if they don't have one.
+     * Users can also request a password reset in case they forget their password.
+     */
+    ?>
     <meta charset="utf-8">
     <title>Log in | Rate my Professor</title>
     <!-- Custom styles for this template -->
@@ -9,16 +17,6 @@
     include_once('db_connect.php');
     include_once('links.html');
     include('nav.php');
-
-
-   /* if (array_key_exists('redirect', $_SESSION)) {
-        $lastPage = $_SESSION['redirect'];
-    } else if (array_key_exists('HTTP_REFERER', $_SERVER)) {
-        $lastPage = $_SERVER['HTTP_REFERER'];
-    } else {
-
-        $lastPage = "http://cs.gettysburg.edu/~dhakam01/cs360/project/Bootstrap/index.php"; //TODO: dynamically figure out the home url
-    } */
     
     if (array_key_exists('login_failed', $_SESSION)) {
         $loginFailed = true;

@@ -1,7 +1,7 @@
 <?php
 /**
  * db_connect.php
- * Script to connect to mysql server
+ * Script to connect to the mysql server
  */
 
 $server = 'ada.cc.gettysburg.edu';

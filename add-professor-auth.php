@@ -1,10 +1,10 @@
 <?php
 /**
  * add-professor-auth.php
- * Authorizing inserting new professor to the database
- * Handling insertion errors when professor already exists in the database
- * or when department or college is not found
- * Author: Amrit, Dung
+ * Script to authenticate and add new professor to the database.
+ * This script will check to see if the college and department
+ * exist in case it was manually entered by the user and produce appropriate error message if they don't exist.
+ * Errors will also be produced if the professor already exists in the database.
  */
 include_once('db_connect.php');
 session_start();

@@ -2,9 +2,11 @@
 <head>
     <?php
     /**
-     * User: Amrit Dhakal
-     * Date: 3/20/16
-     * Time: 3:16 PM
+     * profile.php
+     * User profile page.
+     * Displays users profile information along with option to edit it.
+     * Also lists the course and professor reviews added by the user along with
+     * the option to edit or delete the review.
      */
     include_once('db_connect.php');
     include_once('links.html');
@@ -12,7 +14,6 @@
 
     if (!isset($_SESSION['user_id'])) {
         $_SESSION['redirect'] = $_SERVER['HTTP_REFERER'];
-        //TODO:Some sort of message in login page telling them that they need to log in
         header('Location:login.php');
     }
     ?>

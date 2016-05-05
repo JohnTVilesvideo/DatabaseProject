@@ -1,9 +1,9 @@
 <?php
 /**
  * add-professor-review.php
- * Authorizing adding a review to a professor. User can review a professor multiple times
- * as long as they took multiple courses with that professor
- * Author: Amrit, Dung
+ * Script to authenticate and add professor review to the database.
+ * Users will be allowed to add multiple professor reviews as long as
+ * the course associated with the reviews are different.
  */
 include_once('db_connect.php');
 session_start();
