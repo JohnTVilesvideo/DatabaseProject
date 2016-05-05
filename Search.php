@@ -2,9 +2,9 @@
 <head>
     <?php
     /**
+     * Search.php
+     * Handling all search requests
      * Author: Amrit
-     * Date: 4/1/16
-     * Time: 4:51 PM
      */
     include_once('db_connect.php');
     include_once('links.html');
